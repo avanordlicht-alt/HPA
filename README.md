@@ -6,6 +6,7 @@ as-is.
 
 ```
 index.html      the entire site (all pages, styles, script)
+content.json    text edited through the editor; overrides index.html
 logo.png        full lockup, shown on the home page
 logo-mark.png   shield mark, header and touch icon
 favicon.svg     browser tab mark
@@ -34,6 +35,72 @@ one is linkable and works with the back button:
 With JavaScript off, every view renders stacked as one long readable page, so
 nothing is hidden from a reader or a crawler.
 
+## Editing the text without touching the code
+
+There is a password-protected editor at **`/#/admin`**. It is not linked from
+anywhere on the site; you get there by typing the address. The default password
+is **`hpa-admin`** — change it before launch (see below).
+
+Once you are in, there are two ways to work:
+
+- **The editor panel.** Every line of text on the site, grouped by page, each in
+  its own box. Search it, or narrow it to one page. Typing in a box changes the
+  site immediately.
+- **Click text to edit.** Turn it on from the bar at the top and then click any
+  words anywhere on the site to rewrite them in place. Use the page menu in that
+  bar to move between pages while it is on — clicking a link edits the link's
+  wording instead of following it.
+
+Alongside the wording, the editor also holds the browser-tab title for each
+page, the sentence search engines show under the site name, and the donation
+link.
+
+### Nothing is live until you publish
+
+Edits are held in your own browser and are visible only to you. Publishing
+writes them to `content.json` in this repository, which redeploys the site.
+Two ways to do that, from the Publish card:
+
+1. **Commit from the page.** Paste a GitHub [fine-grained personal access
+   token](https://github.com/settings/personal-access-tokens) scoped to this
+   repository with **Contents: read and write**. The button commits
+   `content.json` for you and Vercel redeploys.
+2. **By hand.** Download `content.json` (or copy it) and commit the file to the
+   repository root yourself. Nothing else is needed.
+
+If you close the browser mid-edit, the draft is still there when you come back.
+"Discard my changes" throws it away; "Back to the original" on any single line
+restores the wording in `index.html`.
+
+### How the override works
+
+`index.html` stays the source of truth. Each line of text is keyed by a hash of
+its original wording, and `content.json` maps those keys to replacements. So
+rewording a line in `index.html` retires the override that used to sit on it,
+and the file wins — an edit in the code is never silently undone by an old
+override. Deleting `content.json` puts every word back to what the markup says.
+
+Text written by the script rather than the markup is not editable this way: the
+donation amount buttons, the sentence below them, the label on the Give button,
+and the copyright year.
+
+### About the password
+
+Change it from the editor's Password card — it takes effect for everyone once
+you publish. To set it in the code instead, replace `BUILTIN_HASH` in
+`index.html` with the SHA-256 of `hpa.editor.v1:` plus your password:
+
+```
+printf 'hpa.editor.v1:your-new-password' | shasum -a 256
+```
+
+Be clear-eyed about what that password does. It is checked in the browser, and
+the page's source is public, so it keeps the editor out of visitors' way — it is
+not a lock on anything. What actually protects the live site is the GitHub
+token: without one, an edit never leaves the browser it was typed in. Give the
+password out freely enough; hand out tokens carefully, and issue one per person
+so a single one can be revoked.
+
 ## Deploy
 
 1. On GitHub, create a repo (e.g. `hpa-site`). Public or private both work.
@@ -54,8 +121,8 @@ you. HTTPS is issued automatically. Point both `example.org` and
 
 ## Fill in before launch
 
-Everything in `[SQUARE BRACKETS]` is a placeholder. Search the file for `[` and
-replace:
+Everything in `[SQUARE BRACKETS]` is a placeholder. Either edit them at
+`/#/admin` and publish, or search `index.html` for `[` and replace:
 
 - `[EMAIL]` — general inbox, appears several times including `mailto:` links
 - `[PRESS EMAIL]` — can be the same address
@@ -92,8 +159,9 @@ order of least work:
 - **Stripe** — a Payment Link or Stripe Checkout gives full control; you handle
   receipting and acknowledgment letters yourself.
 
-Whichever you pick, you get a URL that goes in `[DONATION LINK]` (it appears
-once, in the script near the bottom of `index.html`). When that value is a real
+Whichever you pick, you get a URL that goes in `[DONATION LINK]` — set it in the
+editor ("Donation link", under Tab titles and settings), or replace the default
+in the script near the bottom of `index.html`. When that value is a real
 `https://` URL, the picker appends `?amount=50&frequency=monthly` so the chosen
 amount carries over — check the parameter names your processor expects and
 adjust the `href()` function if they differ. Don't build a custom checkout for

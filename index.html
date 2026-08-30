@@ -362,6 +362,150 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
   .alert{justify-content:flex-start}
   .alert .cred{display:none}
 }
+
+/* ---------- site editor (#/admin), editor bar, inline editing ---------- */
+
+/* Never part of the no-JS stacked page: it is a tool, not a page. */
+#view-admin{display:none}
+.js #view-admin.is-on{display:block}
+
+.adm{max-width:1080px;margin:0 auto;padding:56px var(--pad)}
+.adm-card{
+  border:1px solid var(--rule);background:#fff;border-radius:3px;
+  padding:26px 28px;margin-bottom:22px;
+}
+.adm-card > h2{font-size:24px;margin-bottom:6px}
+.adm-card > .hint{color:var(--muted);font-size:15px;margin-bottom:18px}
+.adm h3{font-size:19px}
+.hint{color:var(--muted);font-size:15px}
+
+.adm label{display:block;font-size:13px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gold-ink);margin-bottom:6px}
+.adm input[type=text],.adm input[type=password],.adm input[type=search],
+.adm select,.adm textarea{
+  width:100%;font-family:var(--body);font-size:16px;color:var(--ink);
+  background:#fff;border:1px solid var(--rule);border-radius:3px;padding:10px 12px;
+}
+.adm textarea{line-height:1.6;resize:vertical;min-height:44px;overflow:hidden}
+.adm input:focus,.adm select:focus,.adm textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.adm .row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:16px}
+.adm .row > div{flex:1 1 200px}
+.adm .check{display:flex;gap:8px;align-items:center;font-size:15px;
+  text-transform:none;letter-spacing:0;color:var(--ink);font-weight:400}
+.adm .check input{width:auto}
+
+.adm-btn{
+  font-family:var(--body);font-size:15px;font-weight:700;cursor:pointer;
+  border:1px solid var(--navy);background:var(--navy);color:#fff;
+  padding:11px 20px;border-radius:3px;line-height:1.2;
+}
+.adm-btn:hover{background:var(--navy-2)}
+.adm-btn.line{background:#fff;color:var(--navy)}
+.adm-btn.line:hover{background:var(--cream)}
+.adm-btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+.adm-btn.gold:hover{filter:brightness(1.06)}
+.adm-btn[disabled]{opacity:.45;cursor:not-allowed}
+.adm-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+.adm-note{margin-top:14px;font-size:15px;padding:11px 14px;border-radius:3px;border:1px solid var(--rule);background:var(--cream)}
+.adm-note.ok{border-color:#B9D3B9;background:#EFF6EF;color:#2C5C33}
+.adm-note.bad{border-color:#E0BDBD;background:#FBF0F0;color:#8C2F2F}
+.adm-note[hidden]{display:none}
+
+.adm-status{
+  display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  border:1px solid var(--rule);border-left:4px solid var(--gold);
+  background:var(--cream-2);padding:14px 18px;border-radius:3px;margin-bottom:22px;font-size:15px;
+}
+.adm-status b{color:var(--navy)}
+
+.adm-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.adm-tools input[type=search]{flex:2 1 260px}
+.adm-tools select{flex:1 1 200px}
+
+.adm-group{border:1px solid var(--rule);border-radius:3px;margin-bottom:12px;background:#fff}
+.adm-group > summary{
+  cursor:pointer;padding:14px 18px;font-family:var(--display);font-size:20px;
+  color:var(--navy);display:flex;justify-content:space-between;gap:14px;align-items:center;
+}
+.adm-group > summary::-webkit-details-marker{display:none}
+.adm-group > summary .count{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:600}
+.adm-group[open] > summary{border-bottom:1px solid var(--rule)}
+.adm-group .inner{padding:6px 18px 18px}
+
+.adm-f{padding:14px 0;border-bottom:1px dashed var(--rule)}
+.adm-f:last-child{border-bottom:0}
+.adm-f .meta{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
+.adm-f .kind{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
+.adm-f .act{font-size:14px;background:none;border:0;color:var(--navy);text-decoration:underline;
+  cursor:pointer;font-family:var(--body);padding:0;visibility:hidden}
+.adm-f.is-changed .act{visibility:visible}
+.adm-f .act:hover{color:var(--gold)}
+.adm-f.is-changed{background:#FFFDF6;box-shadow:inset 3px 0 0 var(--gold);padding-left:12px}
+.adm-f.is-changed .kind::after{content:" · changed";color:var(--gold-ink)}
+.adm-empty{padding:26px;text-align:center;color:var(--muted)}
+
+/* editor bar */
+.hpa-bar{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:46px;
+  display:flex;align-items:center;gap:12px;padding:0 16px;
+  background:var(--navy-deep);color:#fff;font-size:14px;font-family:var(--body);
+  border-bottom:1px solid rgba(255,255,255,.14);
+}
+.hpa-on body{padding-top:46px}
+.hpa-on .masthead{top:46px}
+.hpa-bar .mark{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+.hpa-bar .sp{flex:1}
+.hpa-bar select{
+  font-family:var(--body);font-size:14px;padding:5px 8px;border-radius:3px;
+  border:1px solid rgba(255,255,255,.25);background:var(--navy);color:#fff;max-width:180px;
+}
+.hpa-bar button{
+  font-family:var(--body);font-size:14px;cursor:pointer;color:#fff;
+  background:transparent;border:1px solid rgba(255,255,255,.3);
+  padding:6px 12px;border-radius:3px;
+}
+.hpa-bar button:hover{background:rgba(255,255,255,.1)}
+.hpa-bar button.on{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);font-weight:700}
+.hpa-bar .n{color:var(--gold);font-weight:700}
+@media (max-width:720px){
+  .hpa-bar{gap:8px;padding:0 10px;font-size:13px;overflow-x:auto}
+  .hpa-bar .mark{display:none}
+}
+
+/* inline editing */
+.hpa-live [data-hpa-ed]{cursor:text}
+.hpa-live [data-hpa-ed]:hover{
+  outline:2px dashed var(--gold);outline-offset:2px;background:rgba(201,162,75,.12);
+}
+.hpa-pop{
+  position:absolute;z-index:300;width:min(460px,calc(100vw - 24px));
+  background:#fff;border:1px solid var(--navy);border-radius:4px;
+  box-shadow:0 18px 46px rgba(14,23,41,.28);padding:14px;
+}
+.hpa-pop .kind{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold-ink);margin-bottom:6px;display:block}
+.hpa-pop textarea{
+  width:100%;font-family:var(--body);font-size:16px;line-height:1.6;color:var(--ink);
+  border:1px solid var(--rule);border-radius:3px;padding:9px 11px;resize:vertical;min-height:80px;
+}
+.hpa-pop .foot{display:flex;gap:8px;align-items:center;margin-top:10px}
+.hpa-pop .foot .sp{flex:1}
+.hpa-pop button{
+  font-family:var(--body);font-size:14px;font-weight:700;cursor:pointer;border-radius:3px;
+  border:1px solid var(--navy);background:var(--navy);color:#fff;padding:7px 14px;
+}
+.hpa-pop button.line{background:#fff;color:var(--navy);font-weight:400}
+
+/* unpublished-draft badge for anyone previewing a draft without the bar */
+.hpa-flag{
+  position:fixed;left:16px;bottom:16px;z-index:150;
+  background:var(--navy-deep);color:#fff;font-size:13px;
+  padding:9px 14px;border-radius:3px;text-decoration:none;
+  box-shadow:0 8px 24px rgba(14,23,41,.3);
+}
+.hpa-flag b{color:var(--gold)}
+@media print{.hpa-bar,.hpa-flag,.hpa-pop{display:none}}
 </style>
 </head>
 <body>
@@ -823,9 +967,9 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
           <button type="button" id="tabOnce" aria-pressed="false">One time</button>
         </div>
         <p class="eyebrow" style="margin-bottom:14px">Choose an amount</p>
-        <div class="amounts" id="amounts" role="group" aria-label="Donation amount"></div>
-        <p class="summary" id="summary"></p>
-        <a class="btn btn-navy" id="giveBtn" href="[DONATION LINK]">Give $50 monthly</a>
+        <div class="amounts" id="amounts" role="group" aria-label="Donation amount" data-hpa-skip></div>
+        <p class="summary" id="summary" data-hpa-skip></p>
+        <a class="btn btn-navy" id="giveBtn" href="[DONATION LINK]" data-hpa-skip>Give $50 monthly</a>
         <p class="fine">Giving is handled by our donation processor; you will be taken there to finish. Hold Prosecutors Accountable, Inc. is a 501(c)(3) organization; contributions are tax-deductible to the extent permitted by law. EIN [PENDING].</p>
       </div>
 
@@ -853,6 +997,96 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
           <p style="margin-bottom:0">Employer matching, donor-advised funds, and stock gifts: <strong><a href="mailto:[EMAIL]?subject=Other%20ways%20to%20give">[EMAIL]</a></strong>.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== SITE EDITOR
+       Reached at #/admin. Deliberately not linked from the navigation,
+       and never rendered in the no-JS stacked page. -->
+  <section class="view" id="view-admin" aria-label="Site editor" data-hpa-skip>
+    <div class="hero navy">
+      <p class="eyebrow on-navy">Site editor</p>
+      <h1>Edit the text on every page</h1>
+      <p class="lede">Sign in with the editor password to change any wording on the site, see it in place, and publish it.</p>
+    </div>
+
+    <div class="adm">
+
+      <form class="adm-card" id="admLock" style="max-width:520px;margin:0 auto">
+        <h2>Editor sign-in</h2>
+        <p class="hint">The password is shared by everyone who edits the site.</p>
+        <label for="admPass">Editor password</label>
+        <input type="password" id="admPass" autocomplete="current-password" spellcheck="false">
+        <div class="adm-btns" style="margin-top:16px"><button class="adm-btn" type="submit">Unlock</button></div>
+        <p class="adm-note bad" id="admLockMsg" hidden></p>
+      </form>
+
+      <div id="admPanel" hidden>
+        <div class="adm-status" id="admStatus"></div>
+
+        <div class="adm-card">
+          <h2>Page text</h2>
+          <p class="hint">Every line of text on the site is listed here. Type into a box and the site changes with it &mdash; nobody else sees the change until you publish.</p>
+          <div class="adm-tools">
+            <input type="search" id="admSearch" placeholder="Search the wording…" aria-label="Search the wording">
+            <select id="admScope" aria-label="Show one page"></select>
+            <label class="check"><input type="checkbox" id="admChanged"> Only what I changed</label>
+          </div>
+          <div id="admFields"></div>
+        </div>
+
+        <div class="adm-card">
+          <h2>Publish</h2>
+          <p class="hint">Publishing writes <code>content.json</code> to the repository, which redeploys the site for everyone. Either let this page commit the file for you, or download it and upload it yourself.</p>
+
+          <h3 style="margin-bottom:10px">Commit it from here</h3>
+          <div class="row">
+            <div style="flex:3 1 320px">
+              <label for="ghToken">GitHub token</label>
+              <input type="password" id="ghToken" spellcheck="false" autocomplete="off"
+                     placeholder="github_pat_… — needs Contents: read and write">
+            </div>
+            <div style="flex:0 0 auto">
+              <label class="check" for="ghRemember"><input type="checkbox" id="ghRemember" checked> Remember on this device</label>
+            </div>
+          </div>
+          <div class="row">
+            <div><label for="ghOwner">Owner</label><input type="text" id="ghOwner" spellcheck="false"></div>
+            <div><label for="ghRepo">Repository</label><input type="text" id="ghRepo" spellcheck="false"></div>
+            <div><label for="ghBranch">Branch</label><input type="text" id="ghBranch" spellcheck="false"></div>
+            <div><label for="ghPath">File</label><input type="text" id="ghPath" spellcheck="false"></div>
+          </div>
+          <div class="adm-btns">
+            <button class="adm-btn gold" type="button" id="admPublish">Publish to the live site</button>
+            <button class="adm-btn line" type="button" id="admForget">Forget token</button>
+          </div>
+          <p class="adm-note" id="admPublishMsg" hidden></p>
+
+          <h3 style="margin:26px 0 10px">Or do it by hand</h3>
+          <div class="adm-btns">
+            <button class="adm-btn line" type="button" id="admDownload">Download content.json</button>
+            <button class="adm-btn line" type="button" id="admCopy">Copy the file</button>
+            <button class="adm-btn line" type="button" id="admDiscard">Discard my changes</button>
+          </div>
+          <p class="hint" style="margin-top:12px">Put the file in the repository root, next to <code>index.html</code>, and the site picks it up on the next deploy.</p>
+        </div>
+
+        <div class="adm-card">
+          <h2>Editor password</h2>
+          <p class="hint">A new password takes effect for everyone once you publish. It is checked in the browser only &mdash; it keeps the editor out of the way of visitors, but it is not a lock on the repository. What actually guards the live site is the GitHub token above.</p>
+          <div class="row">
+            <div><label for="admNew">New password</label><input type="password" id="admNew" autocomplete="new-password" spellcheck="false"></div>
+            <div><label for="admNew2">Repeat it</label><input type="password" id="admNew2" autocomplete="new-password" spellcheck="false"></div>
+          </div>
+          <div class="adm-btns"><button class="adm-btn line" type="button" id="admSetPass">Set password</button></div>
+          <p class="adm-note" id="admPassMsg" hidden></p>
+        </div>
+
+        <div class="adm-btns" style="justify-content:flex-end">
+          <button class="adm-btn line" type="button" id="admLockBtn">Sign out of the editor</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -902,11 +1136,480 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
       </div>
     </div>
     <div class="base">
-      <span>&copy; <span id="yr">2026</span> Hold Prosecutors Accountable, Inc. All rights reserved. EIN [PENDING].</span>
+      <span>&copy; <span id="yr" data-hpa-skip>2026</span> Hold Prosecutors Accountable, Inc. All rights reserved. EIN [PENDING].</span>
       <span>Not a law firm. Nothing on this site is legal advice.</span>
     </div>
   </div>
 </footer>
+
+<script>
+/* ======================================================================
+   Editable content layer.
+
+   Every run of text on the site is registered here, node by node, and
+   keyed by a short hash of its original wording. Published overrides live
+   in content.json at the site root; the editor at #/admin writes that file.
+
+   index.html stays the source of truth: rewording a line here changes its
+   key, which quietly retires the override that used to sit on it.
+   ====================================================================== */
+window.HPA = (function(){
+  "use strict";
+
+  var PUB_FILE  = "content.json";
+  var CACHE_KEY = "hpa.published.v1";
+  var DRAFT_KEY = "hpa.draft.v1";
+  var SALT      = "hpa.editor.v1:";
+
+  /* SHA-256 of SALT + the editor password. Default password: hpa-admin
+     Change it from the editor and publish, or replace this digest. */
+  var BUILTIN_HASH = "29f4d4fed96ab8b67218507339186c2a824388a2222f4bd237f33fd374e9114d";
+
+  var PAGES = ["home","mission","accountability","defense","reentry","research","help","donate"];
+
+  var TITLES = {
+    home:"Hold Prosecutors Accountable, Inc.",
+    mission:"Mission — Hold Prosecutors Accountable",
+    accountability:"Prosecutorial accountability — Hold Prosecutors Accountable",
+    defense:"The right to a fair defense — Hold Prosecutors Accountable",
+    reentry:"Housing, banking, and life after release — Hold Prosecutors Accountable",
+    research:"Research — Hold Prosecutors Accountable",
+    help:"Get help — Hold Prosecutors Accountable",
+    donate:"Donate — Hold Prosecutors Accountable",
+    admin:"Site editor — Hold Prosecutors Accountable"
+  };
+
+  var SCOPES = [
+    {id:"header",         page:"home",           label:"Header and top banner",     sel:[".alert",".masthead"]},
+    {id:"home",           page:"home",           label:"Home",                      sel:["#view-home"]},
+    {id:"mission",        page:"mission",        label:"Mission",                   sel:["#view-mission"]},
+    {id:"accountability", page:"accountability", label:"Prosecutorial accountability", sel:["#view-accountability"]},
+    {id:"defense",        page:"defense",        label:"The right to a fair defense",  sel:["#view-defense"]},
+    {id:"reentry",        page:"reentry",        label:"Housing, banking, reentry",    sel:["#view-reentry"]},
+    {id:"research",       page:"research",       label:"Research",                  sel:["#view-research"]},
+    {id:"help",           page:"help",           label:"Get help",                  sel:["#view-help"]},
+    {id:"donate",         page:"donate",         label:"Donate",                    sel:["#view-donate"]},
+    {id:"footer",         page:"home",           label:"Closing and footer",        sel:[".closing",".foot"]},
+    {id:"settings",       page:null,             label:"Tab titles and settings",   sel:[]}
+  ];
+
+  var SKIP_TAGS = {SCRIPT:1,STYLE:1,NOSCRIPT:1,TEXTAREA:1,OPTION:1};
+
+  var entries = [];      /* registry, in document order */
+  var byKey   = {};
+  var published = {};    /* key -> text, from content.json */
+  var pubMeta   = {};    /* version, updated, adminHash */
+  var draft     = null;  /* {text:{}, adminHash?} — this browser only */
+  var settings  = {donateLink:"[DONATION LINK]"};
+  var listeners = [];
+  var current   = "home";
+  var saveTimer = null;
+
+  /* ---------- small helpers ---------- */
+
+  function hash(s){
+    var h = 5381, i = s.length;
+    while (i) h = (h * 33 ^ s.charCodeAt(--i)) >>> 0;
+    return h.toString(36);
+  }
+  function has(o, k){ return o && Object.prototype.hasOwnProperty.call(o, k); }
+  function store(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function keep(k, v){
+    try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {}
+  }
+
+  /* ---------- registry ---------- */
+
+  function labelFor(el){
+    var t = el.tagName;
+    if (/^H[1-6]$/.test(t)) return "Heading";
+    if (t === "P"){
+      if (el.classList.contains("lede")) return "Opening paragraph";
+      if (el.classList.contains("eyebrow")) return "Kicker";
+      if (el.classList.contains("fine") || el.classList.contains("note")) return "Fine print";
+      return "Paragraph";
+    }
+    if (t === "LI") return "List item";
+    if (t === "A") return "Link";
+    if (t === "BUTTON") return "Button";
+    if (t === "SUMMARY") return "Expander title";
+    if (t === "FIGCAPTION") return "Caption";
+    if (t === "STRONG" || t === "B") return "Bold text";
+    if (t === "EM" || t === "I") return "Italic text";
+    if (t === "BLOCKQUOTE") return "Quote";
+    return "Text";
+  }
+
+  function add(e){
+    var base = e.key, n = 1;
+    while (byKey[e.key]) e.key = base + "-" + (++n);
+    byKey[e.key] = e;
+    entries.push(e);
+    return e;
+  }
+
+  function addTextNodes(root, scope){
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n){
+        var p = n.parentNode;
+        if (!p || p.nodeType !== 1 || SKIP_TAGS[p.tagName]) return NodeFilter.FILTER_REJECT;
+        if (p.closest("[data-hpa-skip]")) return NodeFilter.FILTER_REJECT;
+        return /\S/.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    }, false);
+
+    var node;
+    while ((node = walker.nextNode())){
+      (function(n){
+        var parts = /^(\s*)([\s\S]*?)(\s*)$/.exec(n.nodeValue);
+        var lead = parts[1], orig = parts[2], trail = parts[3];
+        var el = n.parentNode;
+        el.setAttribute("data-hpa-ed", "");
+        add({
+          key: scope.id + ".t" + hash(orig),
+          kind: "text",
+          scope: scope,
+          el: el,
+          node: n,
+          orig: orig,
+          label: labelFor(el),
+          context: "",
+          set: function(v){ n.nodeValue = lead + v + trail; }
+        });
+      })(node);
+    }
+  }
+
+  function addLinks(root, scope){
+    Array.prototype.forEach.call(root.querySelectorAll("a[href]"), function(a){
+      var href = a.getAttribute("href");
+      if (!/^(mailto:|tel:|https?:)/i.test(href)) return;
+      if (a.closest("[data-hpa-skip]")) return;
+      add({
+        key: scope.id + ".u" + hash(href + "|" + a.textContent.trim()),
+        kind: "url",
+        scope: scope,
+        el: a,
+        orig: href,
+        label: "Link address",
+        context: a.textContent.trim(),
+        set: function(v){ a.setAttribute("href", v); }
+      });
+    });
+  }
+
+  function addSettings(){
+    var scope = SCOPES[SCOPES.length - 1];
+    var meta = document.querySelector('meta[name="description"]');
+
+    add({
+      key:"setting.donateLink", kind:"setting", scope:scope,
+      orig:"[DONATION LINK]", label:"Donation link",
+      context:"Where the Donate buttons send people",
+      set:function(v){ settings.donateLink = v; }
+    });
+
+    if (meta) add({
+      key:"setting.description", kind:"setting", scope:scope,
+      orig: meta.getAttribute("content"), label:"Search-result description",
+      context:"The sentence search engines show under the site name",
+      set:function(v){ meta.setAttribute("content", v); }
+    });
+
+    PAGES.forEach(function(p){
+      add({
+        key:"title." + p, kind:"setting", scope:scope,
+        orig: TITLES[p], label:"Browser tab title",
+        context: "The " + p + " page",
+        set: (function(page){
+          return function(v){
+            TITLES[page] = v;
+            if (current === page) document.title = v;
+          };
+        })(p)
+      });
+    });
+  }
+
+  function build(){
+    SCOPES.forEach(function(scope){
+      scope.sel.forEach(function(sel){
+        Array.prototype.forEach.call(document.querySelectorAll(sel), function(root){
+          addTextNodes(root, scope);
+          addLinks(root, scope);
+        });
+      });
+    });
+    addSettings();
+  }
+
+  /* ---------- values ---------- */
+
+  function base(entry){ return has(published, entry.key) ? published[entry.key] : entry.orig; }
+  function valueOf(entry){
+    if (draft && has(draft.text, entry.key)) return draft.text[entry.key];
+    return base(entry);
+  }
+
+  function apply(){
+    entries.forEach(function(e){ e.set(valueOf(e)); });
+    listeners.forEach(function(fn){ try { fn(); } catch (err) {} });
+  }
+
+  /* ---------- the local draft ---------- */
+
+  function readDraft(){
+    var raw = store(DRAFT_KEY);
+    if (!raw) return null;
+    try {
+      var d = JSON.parse(raw);
+      if (!d || typeof d !== "object" || !d.text) return null;
+      return d;
+    } catch (e) { return null; }
+  }
+
+  function writeDraft(){
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      if (!draft || (!Object.keys(draft.text).length && !draft.adminHash)){
+        draft = null;
+        keep(DRAFT_KEY, null);
+      } else {
+        keep(DRAFT_KEY, JSON.stringify(draft));
+      }
+    }, 250);
+  }
+
+  function set(key, val){
+    var e = byKey[key];
+    if (!e) return;
+    if (!draft) draft = {text:{}};
+    if (val === base(e)) delete draft.text[key];
+    else draft.text[key] = val;
+    e.set(valueOf(e));
+    writeDraft();
+    listeners.forEach(function(fn){ try { fn(); } catch (err) {} });
+  }
+
+  function revert(key){
+    var e = byKey[key];
+    if (e) set(key, e.orig);
+  }
+
+  function discard(){
+    draft = null;
+    keep(DRAFT_KEY, null);
+    apply();
+  }
+
+  function changed(){
+    if (!draft) return 0;
+    return Object.keys(draft.text).length + (draft.adminHash ? 1 : 0);
+  }
+
+  /* ---------- published file ---------- */
+
+  function adopt(json){
+    published = (json && json.text && typeof json.text === "object") ? json.text : {};
+    pubMeta = {
+      version: json && json.version,
+      updated: json && json.updated,
+      adminHash: json && json.adminHash
+    };
+    /* A draft entry that matches what is now live is no longer a change. */
+    if (draft){
+      Object.keys(draft.text).forEach(function(k){
+        var e = byKey[k];
+        if (e && draft.text[k] === base(e)) delete draft.text[k];
+      });
+      if (draft.adminHash && draft.adminHash === pubMeta.adminHash) delete draft.adminHash;
+      writeDraft();
+    }
+  }
+
+  function load(){
+    var cached = store(CACHE_KEY);
+    if (cached){
+      try { adopt(JSON.parse(cached)); } catch (e) {}
+    }
+    apply();
+
+    if (!window.fetch) return;
+    fetch(PUB_FILE + "?t=" + Date.now(), {cache:"no-store"}).then(function(r){
+      if (r.status === 404){
+        keep(CACHE_KEY, null);
+        adopt(null);
+        apply();
+        return null;
+      }
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(function(json){
+      if (!json) return;
+      keep(CACHE_KEY, JSON.stringify(json));
+      adopt(json);
+      apply();
+    })["catch"](function(){
+      /* No published overrides reachable — the markup as written stands. */
+    });
+  }
+
+  /* ---------- the file the editor publishes ---------- */
+
+  function payload(){
+    var text = {};
+    entries.forEach(function(e){
+      var v = valueOf(e);
+      if (v !== e.orig) text[e.key] = v;
+    });
+    var out = {version:1, updated:new Date().toISOString(), text:text};
+    var h = adminHash();
+    if (h !== BUILTIN_HASH) out.adminHash = h;
+    return out;
+  }
+
+  function json(){ return JSON.stringify(payload(), null, 2) + "\n"; }
+
+  /* ---------- password ---------- */
+
+  function adminHash(){
+    if (draft && draft.adminHash) return draft.adminHash;
+    if (pubMeta.adminHash) return pubMeta.adminHash;
+    return BUILTIN_HASH;
+  }
+
+  function digest(password){
+    if (!window.crypto || !crypto.subtle || !window.TextEncoder){
+      return Promise.reject(new Error("insecure-context"));
+    }
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(SALT + password))
+      .then(function(buf){
+        return Array.prototype.map.call(new Uint8Array(buf), function(b){
+          return ("0" + b.toString(16)).slice(-2);
+        }).join("");
+      });
+  }
+
+  function setPassword(password){
+    return digest(password).then(function(h){
+      if (!draft) draft = {text:{}};
+      draft.adminHash = h;
+      writeDraft();
+      listeners.forEach(function(fn){ try { fn(); } catch (e) {} });
+      return h;
+    });
+  }
+
+  /* ---------- publishing over the GitHub contents API ---------- */
+
+  function b64(str){
+    var bytes = new TextEncoder().encode(str), bin = "", i;
+    for (i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+
+  function publish(cfg){
+    var api = "https://api.github.com/repos/" + encodeURIComponent(cfg.owner) + "/" +
+              encodeURIComponent(cfg.repo) + "/contents/" +
+              cfg.path.split("/").map(encodeURIComponent).join("/");
+    var head = {
+      "Authorization": "Bearer " + cfg.token,
+      "Accept": "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28"
+    };
+    var body = json();
+
+    function fail(r){
+      return r.json()["catch"](function(){ return {}; }).then(function(j){
+        var why = j.message || ("HTTP " + r.status);
+        if (r.status === 401) why = "GitHub rejected the token.";
+        if (r.status === 403) why = "That token is not allowed to write to this repository.";
+        if (r.status === 404) why = "No such repository, branch, or the token cannot see it.";
+        if (r.status === 409) why = "The file changed on GitHub since this page loaded. Reload and publish again.";
+        throw new Error(why);
+      });
+    }
+
+    return fetch(api + "?ref=" + encodeURIComponent(cfg.branch), {headers: head})
+      .then(function(r){
+        if (r.status === 404) return null;          /* first publish */
+        if (!r.ok) return fail(r);
+        return r.json();
+      })
+      .then(function(existing){
+        var payloadBody = {
+          message: cfg.message || "Update site text from the editor",
+          content: b64(body),
+          branch: cfg.branch
+        };
+        if (existing && existing.sha) payloadBody.sha = existing.sha;
+        return fetch(api, {
+          method: "PUT",
+          headers: head,
+          body: JSON.stringify(payloadBody)
+        });
+      })
+      .then(function(r){
+        if (!r.ok) return fail(r);
+        return r.json();
+      })
+      .then(function(res){
+        /* What was a draft is now live. */
+        var live = payload();
+        keep(CACHE_KEY, JSON.stringify(live));
+        adopt(live);
+        draft = null;
+        keep(DRAFT_KEY, null);
+        apply();
+        return res;
+      });
+  }
+
+  /* ---------- public surface ---------- */
+
+  draft = readDraft();
+  build();
+  load();
+
+  return {
+    PAGES: PAGES,
+    SCOPES: SCOPES,
+    entries: entries,
+    entry: function(key){ return byKey[key]; },
+    value: function(key){ var e = byKey[key]; return e ? valueOf(e) : null; },
+    isChanged: function(key){ var e = byKey[key]; return !!e && valueOf(e) !== base(e); },
+    set: set,
+    revert: revert,
+    discard: discard,
+    changed: changed,
+    apply: apply,
+    json: json,
+    publishedAt: function(){ return pubMeta.updated || null; },
+    setting: function(name){ return settings[name]; },
+    pageTitle: function(page){ return TITLES[page] || TITLES.home; },
+    route: function(page){ current = page; },
+    entryFor: function(node){
+      /* the registered entry that owns a DOM text node, if any */
+      for (var i = 0; i < entries.length; i++) if (entries[i].node === node) return entries[i];
+      return null;
+    },
+    entryIn: function(el){
+      for (var i = 0; i < entries.length; i++){
+        var e = entries[i];
+        if (e.node && el.contains(e.node)) return e;
+      }
+      return null;
+    },
+    digest: digest,
+    verify: function(password){
+      return digest(password).then(function(h){ return h === adminHash(); });
+    },
+    setPassword: setPassword,
+    publish: publish,
+    onChange: function(fn){ listeners.push(fn); }
+  };
+})();
+</script>
 
 <script>
 (function(){
@@ -916,17 +1619,8 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
   /* ---------- page routing ---------- */
 
-  var PAGES = ["home","mission","accountability","defense","reentry","research","help","donate"];
-  var TITLES = {
-    home:"Hold Prosecutors Accountable, Inc.",
-    mission:"Mission — Hold Prosecutors Accountable",
-    accountability:"Prosecutorial accountability — Hold Prosecutors Accountable",
-    defense:"The right to a fair defense — Hold Prosecutors Accountable",
-    reentry:"Housing, banking, and life after release — Hold Prosecutors Accountable",
-    research:"Research — Hold Prosecutors Accountable",
-    help:"Get help — Hold Prosecutors Accountable",
-    donate:"Donate — Hold Prosecutors Accountable"
-  };
+  var PAGES = window.HPA.PAGES;
+  var VIEWS = PAGES.concat(["admin"]);
 
   var nav = document.getElementById("nav");
   var menuBtn = document.getElementById("menuBtn");
@@ -934,11 +1628,11 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
   function pageFromHash(){
     var h = (location.hash || "").replace(/^#\/?/, "").replace(/\/$/, "");
-    return PAGES.indexOf(h) > -1 ? h : "home";
+    return VIEWS.indexOf(h) > -1 ? h : "home";
   }
 
   function show(page, scroll){
-    PAGES.forEach(function(p){
+    VIEWS.forEach(function(p){
       var el = document.getElementById("view-" + p);
       if (el) el.classList.toggle("is-on", p === page);
     });
@@ -947,8 +1641,9 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
       if (target === page) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");
     });
-    closing.hidden = (page === "donate" || page === "help");
-    document.title = TITLES[page] || TITLES.home;
+    closing.hidden = (page === "donate" || page === "help" || page === "admin");
+    window.HPA.route(page);
+    document.title = window.HPA.pageTitle(page);
     nav.classList.remove("is-open");
     menuBtn.setAttribute("aria-expanded", "false");
     if (scroll) window.scrollTo(0, 0);
@@ -966,8 +1661,6 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
   var MONTHLY = [10, 25, 50, 100, 250, 500];
   var ONCE = [25, 50, 100, 250, 500, 1000];
-  var LINK = "[DONATION LINK]";
-
   var monthly = true;
   var amount = 50;
 
@@ -979,6 +1672,7 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
   function href(){
     /* Placeholder links out as-is; a real processor URL gets the choice appended. */
+    var LINK = window.HPA.setting("donateLink");
     if (!/^https?:/i.test(LINK)) return LINK;
     return LINK + (LINK.indexOf("?") > -1 ? "&" : "?") +
       "amount=" + amount + "&frequency=" + (monthly ? "monthly" : "once");
@@ -1011,7 +1705,652 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
   tabMonthly.addEventListener("click", function(){ monthly = true; render(); });
   tabOnce.addEventListener("click", function(){ monthly = false; render(); });
+  window.HPA.onChange(render);
   render();
+})();
+</script>
+
+<script>
+/* ======================================================================
+   The editor at #/admin, the bar it puts across the top, and click-to-edit
+   on the page itself. Everything it changes goes through window.HPA.
+   ====================================================================== */
+(function(){
+  "use strict";
+
+  var HPA = window.HPA;
+  if (!HPA) return;
+
+  var UNLOCK_KEY = "hpa.unlocked.v1";
+  var GH_KEY     = "hpa.github.v1";
+  var GH_DEFAULT = {owner:"avanordlicht-alt", repo:"hpa", branch:"main", path:"content.json", token:""};
+
+  var lockForm  = document.getElementById("admLock");
+  var lockMsg   = document.getElementById("admLockMsg");
+  var passInput = document.getElementById("admPass");
+  var panel     = document.getElementById("admPanel");
+  var statusEl  = document.getElementById("admStatus");
+  var fieldsEl  = document.getElementById("admFields");
+  var searchEl  = document.getElementById("admSearch");
+  var scopeEl   = document.getElementById("admScope");
+  var changedEl = document.getElementById("admChanged");
+
+  var unlocked = false;
+  var bar = null, flag = null, pop = null, live = false;
+  var rows = {};        /* key -> {row, ta} for rendered fields */
+  var openGroups = {};  /* scope id -> bool */
+  var rendered = {};    /* scope id -> bool */
+
+  try { unlocked = sessionStorage.getItem(UNLOCK_KEY) === "1"; } catch (e) {}
+
+  function page(){
+    var h = (location.hash || "").replace(/^#\/?/, "").replace(/\/$/, "");
+    return h || "home";
+  }
+  function note(el, text, kind){
+    el.textContent = text;
+    el.className = "adm-note" + (kind ? " " + kind : "");
+    el.hidden = !text;
+  }
+  function grow(ta){ ta.style.height = "auto"; ta.style.height = (ta.scrollHeight + 2) + "px"; }
+
+  /* ---------- sign in and out ---------- */
+
+  function unlock(){
+    unlocked = true;
+    try { sessionStorage.setItem(UNLOCK_KEY, "1"); } catch (e) {}
+    syncLock();
+  }
+  function lock(){
+    unlocked = false;
+    try { sessionStorage.removeItem(UNLOCK_KEY); } catch (e) {}
+    setLive(false);
+    syncLock();
+  }
+
+  lockForm.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var value = passInput.value;
+    if (!value) return;
+    HPA.verify(value).then(function(ok){
+      if (!ok){ note(lockMsg, "That password does not match.", "bad"); return; }
+      passInput.value = "";
+      note(lockMsg, "", "");
+      unlock();
+    })["catch"](function(err){
+      note(lockMsg, err && err.message === "insecure-context"
+        ? "The editor needs a secure (https) connection to check the password."
+        : "The password could not be checked in this browser.", "bad");
+    });
+  });
+
+  document.getElementById("admLockBtn").addEventListener("click", function(){
+    lock();
+    location.hash = "#/";
+  });
+
+  /* ---------- the bar across the top ---------- */
+
+  function buildBar(){
+    if (bar) return;
+    bar = document.createElement("div");
+    bar.className = "hpa-bar";
+    bar.setAttribute("data-hpa-skip", "");
+
+    var mark = document.createElement("span");
+    mark.className = "mark";
+    mark.textContent = "Editing";
+    bar.appendChild(mark);
+
+    var jump = document.createElement("select");
+    jump.setAttribute("aria-label", "Go to a page");
+    HPA.SCOPES.forEach(function(s){
+      if (!s.page || s.id === "header" || s.id === "footer") return;
+      var o = document.createElement("option");
+      o.value = s.page; o.textContent = s.label;
+      jump.appendChild(o);
+    });
+    var o = document.createElement("option");
+    o.value = "admin"; o.textContent = "— Editor panel —";
+    jump.appendChild(o);
+    jump.value = page();
+    jump.addEventListener("change", function(){ location.hash = "#/" + jump.value; });
+    bar.appendChild(jump);
+
+    var liveBtn = document.createElement("button");
+    liveBtn.type = "button";
+    liveBtn.textContent = "Click text to edit";
+    liveBtn.addEventListener("click", function(){ setLive(!live); });
+    bar.appendChild(liveBtn);
+
+    var count = document.createElement("span");
+    bar.appendChild(count);
+
+    var sp = document.createElement("span");
+    sp.className = "sp";
+    bar.appendChild(sp);
+
+    var pubBtn = document.createElement("button");
+    pubBtn.type = "button";
+    pubBtn.textContent = "Publish…";
+    pubBtn.addEventListener("click", function(){
+      location.hash = "#/admin";
+      setTimeout(function(){
+        var card = document.getElementById("admPublish");
+        if (card) card.scrollIntoView({block:"center"});
+      }, 60);
+    });
+    bar.appendChild(pubBtn);
+
+    var outBtn = document.createElement("button");
+    outBtn.type = "button";
+    outBtn.textContent = "Sign out";
+    outBtn.addEventListener("click", function(){ lock(); });
+    bar.appendChild(outBtn);
+
+    bar.jump = jump; bar.liveBtn = liveBtn; bar.count = count;
+    document.body.appendChild(bar);
+    document.documentElement.classList.add("hpa-on");
+  }
+
+  function dropBar(){
+    if (!bar) return;
+    bar.parentNode.removeChild(bar);
+    bar = null;
+    document.documentElement.classList.remove("hpa-on");
+  }
+
+  function syncBar(){
+    if (!bar) return;
+    var n = HPA.changed();
+    bar.count.innerHTML = "";
+    if (n){
+      var b = document.createElement("span");
+      b.className = "n";
+      b.textContent = n;
+      bar.count.appendChild(b);
+      bar.count.appendChild(document.createTextNode(n === 1 ? " unpublished change" : " unpublished changes"));
+    } else {
+      bar.count.textContent = "Everything is published";
+    }
+    bar.liveBtn.className = live ? "on" : "";
+    if (bar.jump.value !== page()) bar.jump.value = page();
+  }
+
+  /* ---------- click-to-edit on the page ---------- */
+
+  function setLive(on){
+    live = !!on && unlocked;
+    document.body.classList.toggle("hpa-live", live);
+    if (!live) closePop();
+    syncBar();
+  }
+
+  function closePop(){
+    if (pop && pop.parentNode) pop.parentNode.removeChild(pop);
+    pop = null;
+  }
+
+  function nodeAt(x, y){
+    var r;
+    if (document.caretPositionFromPoint){
+      r = document.caretPositionFromPoint(x, y);
+      return r && r.offsetNode;
+    }
+    if (document.caretRangeFromPoint){
+      r = document.caretRangeFromPoint(x, y);
+      return r && r.startContainer;
+    }
+    return null;
+  }
+
+  function openPop(entry, el, x, y){
+    closePop();
+    pop = document.createElement("div");
+    pop.className = "hpa-pop";
+    pop.setAttribute("data-hpa-skip", "");
+
+    var kind = document.createElement("span");
+    kind.className = "kind";
+    kind.textContent = entry.label + " · " + entry.scope.label;
+    pop.appendChild(kind);
+
+    var ta = document.createElement("textarea");
+    ta.value = HPA.value(entry.key);
+    ta.addEventListener("input", function(){
+      HPA.set(entry.key, ta.value);
+    });
+    ta.addEventListener("keydown", function(ev){
+      if (ev.key === "Escape"){ ev.preventDefault(); closePop(); }
+      if (ev.key === "Enter" && (ev.metaKey || ev.ctrlKey)){ ev.preventDefault(); closePop(); }
+    });
+    pop.appendChild(ta);
+
+    var foot = document.createElement("div");
+    foot.className = "foot";
+
+    var revert = document.createElement("button");
+    revert.type = "button";
+    revert.className = "line";
+    revert.textContent = "Back to the original";
+    revert.addEventListener("click", function(){
+      HPA.revert(entry.key);
+      ta.value = HPA.value(entry.key);
+    });
+    foot.appendChild(revert);
+
+    var sp = document.createElement("span");
+    sp.className = "sp";
+    foot.appendChild(sp);
+
+    var done = document.createElement("button");
+    done.type = "button";
+    done.textContent = "Done";
+    done.addEventListener("click", closePop);
+    foot.appendChild(done);
+
+    pop.appendChild(foot);
+    document.body.appendChild(pop);
+
+    /* below the line if it fits, above it if that fits better, and never
+       off the top or bottom of the window */
+    var rect = el.getBoundingClientRect();
+    var height = pop.offsetHeight;
+    var fitsBelow = rect.bottom + 8 + height <= window.innerHeight;
+    var fitsAbove = rect.top - 8 - height >= 52;
+    var top = (fitsBelow || !fitsAbove) ? rect.bottom + 8 : rect.top - height - 8;
+    top = Math.max(52, Math.min(top, window.innerHeight - height - 12));
+    var left = window.pageXOffset + Math.min(rect.left, x - 60);
+    left = Math.max(window.pageXOffset + 12, Math.min(left, window.pageXOffset + window.innerWidth - pop.offsetWidth - 12));
+    pop.style.top = (window.pageYOffset + top) + "px";
+    pop.style.left = left + "px";
+
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+  }
+
+  document.addEventListener("click", function(ev){
+    if (!live) return;
+    var t = ev.target;
+    if (!t || t.nodeType !== 1) return;
+    if (t.closest(".hpa-bar, .hpa-pop, #view-admin")) return;
+
+    var host = t.closest("[data-hpa-ed]");
+    if (!host) return;
+
+    var node = nodeAt(ev.clientX, ev.clientY);
+    var entry = (node && node.nodeType === 3 && HPA.entryFor(node)) || HPA.entryIn(host);
+    if (!entry) return;
+
+    ev.preventDefault();
+    ev.stopPropagation();
+    openPop(entry, entry.node ? entry.node.parentNode : host, ev.clientX, ev.clientY);
+  }, true);
+
+  document.addEventListener("keydown", function(ev){
+    if (ev.key === "Escape" && pop) closePop();
+  });
+
+  /* ---------- the field list ---------- */
+
+  function filterState(){
+    return {
+      q: (searchEl.value || "").trim().toLowerCase(),
+      scope: scopeEl.value,
+      onlyChanged: changedEl.checked
+    };
+  }
+
+  function matches(e, f){
+    if (f.scope && e.scope.id !== f.scope) return false;
+    if (f.onlyChanged && !HPA.isChanged(e.key)) return false;
+    if (f.q){
+      var hay = (HPA.value(e.key) + " " + e.orig + " " + e.label + " " + (e.context || "")).toLowerCase();
+      if (hay.indexOf(f.q) < 0) return false;
+    }
+    return true;
+  }
+
+  function fieldRow(e){
+    var row = document.createElement("div");
+    row.className = "adm-f";
+
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    var kind = document.createElement("span");
+    kind.className = "kind";
+    kind.textContent = e.label + (e.context ? " · " + e.context : "");
+    meta.appendChild(kind);
+    var act = document.createElement("button");
+    act.type = "button";
+    act.className = "act";
+    act.textContent = "Back to the original";
+    act.addEventListener("click", function(){
+      HPA.revert(e.key);
+      ta.value = HPA.value(e.key);
+      grow(ta);
+    });
+    meta.appendChild(act);
+    row.appendChild(meta);
+
+    var ta = document.createElement("textarea");
+    ta.value = HPA.value(e.key);
+    ta.rows = 1;
+    ta.setAttribute("aria-label", e.label + " on " + e.scope.label);
+    ta.addEventListener("input", function(){
+      HPA.set(e.key, ta.value);
+      grow(ta);
+    });
+    row.appendChild(ta);
+
+    rows[e.key] = {row: row, ta: ta};
+    setTimeout(function(){ grow(ta); }, 0);
+    return row;
+  }
+
+  function renderFields(){
+    var f = filterState();
+    var filtering = !!(f.q || f.onlyChanged || f.scope);
+    var groups = {};
+    var total = 0;
+
+    HPA.entries.forEach(function(e){
+      if (!matches(e, f)) return;
+      (groups[e.scope.id] = groups[e.scope.id] || []).push(e);
+      total++;
+    });
+
+    rows = {};
+    rendered = {};
+    fieldsEl.innerHTML = "";
+
+    if (!total){
+      var empty = document.createElement("p");
+      empty.className = "adm-empty";
+      empty.textContent = f.onlyChanged ? "Nothing changed yet." : "Nothing matches that search.";
+      fieldsEl.appendChild(empty);
+      return;
+    }
+
+    HPA.SCOPES.forEach(function(scope){
+      var list = groups[scope.id];
+      if (!list) return;
+
+      var d = document.createElement("details");
+      d.className = "adm-group";
+      var open = filtering || (scope.id in openGroups ? openGroups[scope.id] : scope.id === lastPage);
+      d.open = !!open;
+
+      var sum = document.createElement("summary");
+      sum.appendChild(document.createTextNode(scope.label));
+      var c = document.createElement("span");
+      c.className = "count";
+      var nch = list.filter(function(e){ return HPA.isChanged(e.key); }).length;
+      c.textContent = list.length + (list.length === 1 ? " line" : " lines") + (nch ? " · " + nch + " changed" : "");
+      sum.appendChild(c);
+      d.appendChild(sum);
+
+      var inner = document.createElement("div");
+      inner.className = "inner";
+      d.appendChild(inner);
+
+      function fill(){
+        if (rendered[scope.id]) return;
+        rendered[scope.id] = true;
+        list.forEach(function(e){ inner.appendChild(fieldRow(e)); });
+        syncRows();
+      }
+      if (d.open) fill();
+      d.addEventListener("toggle", function(){
+        openGroups[scope.id] = d.open;
+        if (d.open) fill();
+      });
+
+      fieldsEl.appendChild(d);
+    });
+  }
+
+  function syncRows(){
+    Object.keys(rows).forEach(function(key){
+      var r = rows[key];
+      r.row.classList.toggle("is-changed", HPA.isChanged(key));
+      var v = HPA.value(key);
+      if (document.activeElement !== r.ta && r.ta.value !== v){
+        r.ta.value = v;
+        grow(r.ta);
+      }
+    });
+  }
+
+  /* ---------- status, draft badge ---------- */
+
+  function syncStatus(){
+    var n = HPA.changed();
+    var at = HPA.publishedAt();
+    statusEl.innerHTML = "";
+
+    var left = document.createElement("span");
+    if (n){
+      left.innerHTML = "<b>" + n + (n === 1 ? " change</b> is waiting" : " changes</b> are waiting") +
+        " on this device. Nobody else sees them until you publish.";
+    } else {
+      left.innerHTML = "<b>Everything is published.</b> The site reads the way it reads for visitors.";
+    }
+    statusEl.appendChild(left);
+
+    var right = document.createElement("span");
+    right.className = "hint";
+    right.textContent = at ? "Last published " + new Date(at).toLocaleString() : "Nothing published yet";
+    statusEl.appendChild(right);
+  }
+
+  function syncFlag(){
+    var want = !unlocked && HPA.changed() > 0;
+    if (want && !flag){
+      flag = document.createElement("a");
+      flag.className = "hpa-flag";
+      flag.href = "#/admin";
+      flag.setAttribute("data-hpa-skip", "");
+      document.body.appendChild(flag);
+    }
+    if (!want && flag){
+      flag.parentNode.removeChild(flag);
+      flag = null;
+    }
+    if (flag){
+      var n = HPA.changed();
+      flag.innerHTML = "<b>Draft</b> — " + n + (n === 1 ? " unpublished edit" : " unpublished edits") + " on this device";
+    }
+  }
+
+  /* ---------- publishing ---------- */
+
+  var gh = (function(){
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(GH_KEY) || "{}") || {}; } catch (e) {}
+    var out = {};
+    Object.keys(GH_DEFAULT).forEach(function(k){
+      out[k] = typeof saved[k] === "string" ? saved[k] : GH_DEFAULT[k];
+    });
+    return out;
+  })();
+
+  var ghToken    = document.getElementById("ghToken");
+  var ghRemember = document.getElementById("ghRemember");
+  var ghOwner    = document.getElementById("ghOwner");
+  var ghRepo     = document.getElementById("ghRepo");
+  var ghBranch   = document.getElementById("ghBranch");
+  var ghPath     = document.getElementById("ghPath");
+  var pubMsg     = document.getElementById("admPublishMsg");
+
+  ghToken.value = gh.token;
+  ghRemember.checked = !!gh.token;
+  ghOwner.value = gh.owner;
+  ghRepo.value = gh.repo;
+  ghBranch.value = gh.branch;
+  ghPath.value = gh.path;
+
+  function saveGh(){
+    var data = {
+      owner: ghOwner.value.trim(),
+      repo: ghRepo.value.trim(),
+      branch: ghBranch.value.trim() || "main",
+      path: ghPath.value.trim() || "content.json",
+      token: ghRemember.checked ? ghToken.value.trim() : ""
+    };
+    try { localStorage.setItem(GH_KEY, JSON.stringify(data)); } catch (e) {}
+    return data;
+  }
+  [ghOwner, ghRepo, ghBranch, ghPath, ghRemember].forEach(function(el){
+    el.addEventListener("change", saveGh);
+  });
+
+  document.getElementById("admForget").addEventListener("click", function(){
+    ghToken.value = "";
+    ghRemember.checked = false;
+    saveGh();
+    note(pubMsg, "The token is gone from this browser.", "ok");
+  });
+
+  document.getElementById("admPublish").addEventListener("click", function(){
+    var btn = this;
+    var cfg = saveGh();
+    cfg.token = ghToken.value.trim();
+    if (!cfg.token){ note(pubMsg, "Paste a GitHub token with write access to the repository.", "bad"); return; }
+    if (!cfg.owner || !cfg.repo){ note(pubMsg, "The owner and repository are both needed.", "bad"); return; }
+
+    btn.disabled = true;
+    note(pubMsg, "Publishing…", "");
+    HPA.publish(cfg).then(function(res){
+      var url = res && res.commit && res.commit.html_url;
+      note(pubMsg, "Published. The site rebuilds in about a minute." + (url ? " Commit: " + url : ""), "ok");
+      renderFields();
+      syncAll();
+    })["catch"](function(err){
+      note(pubMsg, "Not published — " + (err && err.message ? err.message : "the request failed") +
+        " You can still download the file and upload it yourself.", "bad");
+    })["finally"](function(){ btn.disabled = false; });
+  });
+
+  document.getElementById("admDownload").addEventListener("click", function(){
+    var blob = new Blob([HPA.json()], {type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "content.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    note(pubMsg, "Downloaded. Put content.json in the repository root and push it.", "ok");
+  });
+
+  document.getElementById("admCopy").addEventListener("click", function(){
+    var text = HPA.json();
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        note(pubMsg, "Copied. Paste it into content.json in the repository.", "ok");
+      })["catch"](function(){ fallback(); note(pubMsg, "Copied.", "ok"); });
+    } else {
+      fallback();
+      note(pubMsg, "Copied.", "ok");
+    }
+  });
+
+  document.getElementById("admDiscard").addEventListener("click", function(){
+    if (!HPA.changed()){ note(pubMsg, "There is nothing to discard.", ""); return; }
+    if (!window.confirm("Throw away every unpublished change on this device?")) return;
+    HPA.discard();
+    renderFields();
+    syncAll();
+    note(pubMsg, "Discarded. The site reads the way it does for visitors.", "ok");
+  });
+
+  /* ---------- password ---------- */
+
+  var passMsg = document.getElementById("admPassMsg");
+  document.getElementById("admSetPass").addEventListener("click", function(){
+    var a = document.getElementById("admNew");
+    var b = document.getElementById("admNew2");
+    if (a.value.length < 8){ note(passMsg, "Use at least eight characters.", "bad"); return; }
+    if (a.value !== b.value){ note(passMsg, "The two do not match.", "bad"); return; }
+    HPA.setPassword(a.value).then(function(){
+      a.value = ""; b.value = "";
+      note(passMsg, "Set. It replaces the old password for everyone once you publish.", "ok");
+      syncAll();
+    })["catch"](function(){
+      note(passMsg, "This browser could not set the password — it needs a secure (https) connection.", "bad");
+    });
+  });
+
+  /* ---------- wiring ---------- */
+
+  var lastPage = "home";
+  var searchTimer = null;
+
+  HPA.SCOPES.forEach(function(s){
+    var o = document.createElement("option");
+    o.value = s.id;
+    o.textContent = s.label;
+    scopeEl.appendChild(o);
+  });
+  var all = document.createElement("option");
+  all.value = "";
+  all.textContent = "Every page";
+  scopeEl.insertBefore(all, scopeEl.firstChild);
+  scopeEl.value = "";
+
+  searchEl.addEventListener("input", function(){
+    if (searchTimer) clearTimeout(searchTimer);
+    searchTimer = setTimeout(renderFields, 140);
+  });
+  scopeEl.addEventListener("change", renderFields);
+  changedEl.addEventListener("change", renderFields);
+
+  function syncAll(){
+    syncStatus();
+    syncRows();
+    syncBar();
+    syncFlag();
+  }
+
+  HPA.onChange(syncAll);
+
+  function syncLock(){
+    var onAdmin = page() === "admin";
+    lockForm.hidden = !onAdmin || unlocked;
+    panel.hidden = !onAdmin || !unlocked;
+
+    if (unlocked){
+      buildBar();
+      if (onAdmin && !fieldsEl.childNodes.length) renderFields();
+    } else {
+      dropBar();
+      setLive(false);
+    }
+    syncAll();
+    if (onAdmin && !unlocked) setTimeout(function(){ passInput.focus(); }, 30);
+  }
+
+  window.addEventListener("hashchange", function(){
+    var p = page();
+    if (p !== "admin") lastPage = p;
+    closePop();
+    syncLock();
+  });
+
+  lastPage = page() === "admin" ? "home" : page();
+  syncLock();
 })();
 </script>
 
