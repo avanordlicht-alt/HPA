@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hold Prosecutors Accountable, Inc.</title>
+<meta name="description" content="A 501(c)(3) nonprofit working on prosecutorial accountability, meaningful access to a defense, pretrial detention reform, and life after a sentence.">
+<meta property="og:title" content="Hold Prosecutors Accountable, Inc.">
+<meta property="og:description" content="Research, public education, and policy advocacy on prosecutorial accountability and equal access to justice.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDEEEA;
+  --paper-2:#E4E6E0;
+  --ink:#16181A;
+  --ink-2:#4A4F52;
+  --rule:#C7CAC3;
+  --seal:#6B2226;
+
+  --display:"Libre Caslon Display",Georgia,serif;
+  --body:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  --util:"Courier Prime",ui-monospace,"Courier New",monospace;
+
+  --rail-w:72px;
+  --pitch:30px;
+  --shell:1180px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit}
+::selection{background:var(--seal);color:var(--paper)}
+
+.skip{
+  position:absolute;left:-9999px;top:0;
+  background:var(--ink);color:var(--paper);
+  padding:12px 18px;z-index:99;font-family:var(--util);font-size:13px;
+}
+.skip:focus{left:0}
+
+:focus-visible{outline:2px solid var(--seal);outline-offset:3px}
+
+/* ---------- shell + transcript rail ---------- */
+
+.page{
+  position:relative;
+  max-width:var(--shell);
+  margin:0 auto;
+  padding:0 28px;
+}
+
+.rail{
+  display:none;
+  position:absolute;
+  top:0;left:28px;width:var(--rail-w);
+  pointer-events:none;
+  user-select:none;
+}
+.rail i{
+  display:block;
+  height:var(--pitch);
+  line-height:var(--pitch);
+  font-family:var(--util);
+  font-size:11px;
+  font-style:normal;
+  color:var(--rule);
+  text-align:right;
+  padding-right:22px;
+  border-right:1px solid var(--rule);
+}
+.rail i.brk{border-top:1px solid var(--rule)}
+.rail i.live{color:var(--seal);font-weight:700}
+
+@media (min-width:1000px){
+  .rail{display:block}
+  .page{padding-left:calc(var(--rail-w) + 56px)}
+}
+
+/* ---------- masthead ---------- */
+
+.masthead{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  padding:34px 0 26px;
+  border-bottom:1px solid var(--rule);
+}
+.mark{text-decoration:none;display:block;max-width:270px}
+.mark b{
+  display:block;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:23px;
+  line-height:1.12;
+  letter-spacing:.005em;
+}
+.mark span{
+  display:block;margin-top:7px;
+  font-family:var(--util);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);
+}
+.nav{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.nav a{
+  font-family:var(--util);font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;color:var(--ink-2);
+  padding-bottom:2px;border-bottom:1px solid transparent;
+}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--seal)}
+.nav a.give{color:var(--seal);border-bottom-color:var(--seal)}
+
+/* ---------- hero ---------- */
+
+.hero{padding:88px 0 0}
+.eyebrow{
+  font-family:var(--util);font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-2);
+}
+.hero h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2.5rem,6.2vw,5.1rem);
+  line-height:1.0;letter-spacing:-.012em;
+  margin:26px 0 0;max-width:15ch;
+}
+.hero h1 em{font-style:italic;color:var(--seal);display:block}
+.stand{
+  margin-top:30px;max-width:52ch;
+  font-size:20px;line-height:1.55;color:var(--ink-2);
+}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+.btn{
+  display:inline-block;text-decoration:none;
+  font-family:var(--util);font-size:12.5px;letter-spacing:.11em;
+  text-transform:uppercase;padding:15px 26px;border:1px solid var(--ink);
+}
+.btn.fill{background:var(--seal);border-color:var(--seal);color:var(--paper)}
+.btn.fill:hover{background:var(--ink);border-color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:var(--paper)}
+
+.filing{
+  margin-top:64px;padding:16px 0;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;gap:10px 30px;
+  font-family:var(--util);font-size:11.5px;letter-spacing:.06em;
+  color:var(--ink-2);text-transform:uppercase;
+}
+
+/* ---------- generic band ---------- */
+
+.band{padding:96px 0 0}
+.band-head{
+  display:grid;grid-template-columns:200px 1fr;gap:34px;
+  align-items:baseline;margin-bottom:46px;
+}
+.band-head h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.85rem,3.4vw,2.9rem);
+  line-height:1.08;letter-spacing:-.008em;max-width:20ch;
+}
+@media (max-width:820px){
+  .band-head{grid-template-columns:1fr;gap:14px}
+}
+
+.lede{max-width:62ch;font-size:19px;line-height:1.62}
+.lede + .lede{margin-top:20px}
+.lede b{font-weight:600}
+
+/* ---------- commitments ---------- */
+
+.commit{margin-top:46px;border-top:1px solid var(--rule)}
+.commit div{
+  display:grid;grid-template-columns:210px 1fr;gap:34px;
+  padding:22px 0;border-bottom:1px solid var(--rule);
+}
+.commit dt{
+  font-family:var(--util);font-size:11.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--seal);padding-top:4px;
+}
+.commit dd{max-width:60ch;color:var(--ink-2)}
+@media (max-width:820px){
+  .commit div{grid-template-columns:1fr;gap:8px}
+}
+
+/* ---------- focus areas ---------- */
+
+.areas{display:grid;grid-template-columns:1fr 1fr;gap:0 60px}
+.area{padding:30px 0 34px;border-top:1px solid var(--ink)}
+.area .tag{
+  font-family:var(--util);font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--seal);
+}
+.area h3{
+  font-family:var(--display);font-weight:400;font-size:1.65rem;
+  line-height:1.14;margin:14px 0 12px;
+}
+.area p{color:var(--ink-2);max-width:44ch}
+@media (max-width:820px){
+  .areas{grid-template-columns:1fr;gap:0}
+}
+
+/* ---------- approach ---------- */
+
+.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.approach h3{
+  font-family:var(--body);font-weight:600;font-size:15px;
+  letter-spacing:.02em;margin-bottom:10px;
+  padding-top:16px;border-top:2px solid var(--seal);
+}
+.approach p{color:var(--ink-2);font-size:16px}
+@media (max-width:820px){.approach{grid-template-columns:1fr;gap:30px}}
+
+/* ---------- involve ---------- */
+
+.involve{
+  margin-top:52px;background:var(--paper-2);
+  border:1px solid var(--rule);
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.involve section{padding:34px 30px;border-right:1px solid var(--rule)}
+.involve section:last-child{border-right:0}
+.involve h3{
+  font-family:var(--display);font-weight:400;font-size:1.4rem;margin-bottom:12px;
+}
+.involve p{font-size:16px;color:var(--ink-2);margin-bottom:18px}
+.involve a.act{
+  font-family:var(--util);font-size:11.5px;letter-spacing:.11em;
+  text-transform:uppercase;text-decoration:none;color:var(--seal);
+  border-bottom:1px solid var(--seal);padding-bottom:2px;
+}
+.involve a.act:hover{color:var(--ink);border-bottom-color:var(--ink)}
+@media (max-width:900px){
+  .involve{grid-template-columns:1fr}
+  .involve section{border-right:0;border-bottom:1px solid var(--rule)}
+  .involve section:last-child{border-bottom:0}
+}
+
+.notice{
+  margin-top:26px;padding:20px 22px;
+  border-left:3px solid var(--seal);background:var(--paper-2);
+  font-size:15.5px;color:var(--ink-2);max-width:66ch;
+}
+.notice b{color:var(--ink);font-weight:600}
+
+/* ---------- contact ---------- */
+
+.contact{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  margin-top:8px;
+}
+.contact dl div{padding:16px 0;border-bottom:1px solid var(--rule)}
+.contact dt{
+  font-family:var(--util);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;
+}
+.contact dd a{color:var(--seal)}
+@media (max-width:820px){.contact{grid-template-columns:1fr;gap:34px}}
+
+/* ---------- footer ---------- */
+
+.foot{
+  margin-top:110px;padding:34px 0 60px;
+  border-top:1px solid var(--ink);
+  display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;
+  font-family:var(--util);font-size:11.5px;line-height:1.9;
+  letter-spacing:.05em;color:var(--ink-2);text-transform:uppercase;
+}
+.foot p{max-width:46ch}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+  <div class="rail" id="rail" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <a class="mark" href="/">
+      <b>Hold Prosecutors<br>Accountable, Inc.</b>
+      <span>501(c)(3) nonprofit</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#mission">Mission</a>
+      <a href="#work">Our work</a>
+      <a href="#approach">Approach</a>
+      <a href="#involved">Get involved</a>
+      <a href="#contact">Contact</a>
+      <a class="give" href="#involved">Donate</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="hero">
+      <p class="eyebrow">Research &middot; Public education &middot; Policy advocacy</p>
+      <h1>The system keeps a record. <em>Someone has to read it.</em></h1>
+      <p class="stand">We study how prosecutorial power is actually used, explain it in plain language, and work toward a criminal justice system where fairness does not depend on what a person can afford.</p>
+      <div class="cta-row">
+        <a class="btn fill" href="#involved">Support the work</a>
+        <a class="btn line" href="#work">See what we work on</a>
+      </div>
+      <div class="filing">
+        <span>Founded [YEAR]</span>
+        <span>[CITY, STATE]</span>
+        <span>EIN [PENDING]</span>
+        <span>Donations are tax-deductible to the extent allowed by law</span>
+      </div>
+    </section>
+
+    <section class="band" id="mission">
+      <div class="band-head">
+        <p class="eyebrow">Mission</p>
+        <h2>Accountability should not be optional for the people with the most discretion.</h2>
+      </div>
+      <p class="lede">Hold Prosecutors Accountable, Inc. is organized and operated exclusively for charitable and educational purposes under Section 501(c)(3) of the Internal Revenue Code. We promote fairness, accountability, transparency, and equal treatment in the criminal justice system.</p>
+      <p class="lede">We do that in three ways: we conduct and publish research on how criminal justice practices work in practice, we educate the public about prosecutorial authority and the rights of accused and formerly incarcerated people, and we advocate &mdash; within the limits that apply to charitable organizations &mdash; for laws and policies that make access to justice something other than a function of wealth, status, or institutional power.</p>
+
+      <dl class="commit">
+        <div>
+          <dt>Officials answer for misconduct</dt>
+          <dd>Government officials are appropriately accountable when they abuse the authority the public gave them.</dd>
+        </div>
+        <div>
+          <dt>A defense that is real</dt>
+          <dd>Accused people have meaningful access to a fair defense regardless of their financial resources.</dd>
+        </div>
+        <div>
+          <dt>Detention by judgment, not price</dt>
+          <dd>Pretrial detention decisions rest on individualized judicial determinations rather than an individual's ability to pay.</dd>
+        </div>
+        <div>
+          <dt>A sentence that ends</dt>
+          <dd>People who have completed their sentences have a meaningful opportunity to reintegrate into society.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="band" id="work">
+      <div class="band-head">
+        <p class="eyebrow">Our work</p>
+        <h2>Four places where discretion decides the outcome.</h2>
+      </div>
+      <div class="areas">
+        <article class="area">
+          <p class="tag">Charging &amp; discretion</p>
+          <h3>Prosecutorial accountability</h3>
+          <p>Prosecutors decide who is charged, what they are charged with, and what a plea will cost. Those decisions carry enormous weight and leave very little public record. We document how that discretion is used and press for the disclosure, oversight, and consequences that other public offices already accept. [Replace with your first project or report.]</p>
+        </article>
+        <article class="area">
+          <p class="tag">Right to counsel</p>
+          <h3>Access to a fair defense</h3>
+          <p>The right to counsel is only as strong as the resources behind it. We examine how underfunded defense systems change outcomes, and we advocate for the staffing, investigation, and expert funding that make a defense meaningful for people who cannot pay privately. [Replace with your first project or report.]</p>
+        </article>
+        <article class="area">
+          <p class="tag">Pretrial</p>
+          <h3>Detention and ability to pay</h3>
+          <p>Whether a person waits for trial at home or in a cell should turn on an individualized judicial finding about risk, not on the size of a bond they cannot post. We support pretrial systems built on judicial determinations rather than on price. [Replace with your first project or report.]</p>
+        </article>
+        <article class="area">
+          <p class="tag">Reentry</p>
+          <h3>Housing, banking, and life after release</h3>
+          <p>A completed sentence should end. We educate the public about the barriers and discrimination formerly incarcerated people face, and we advocate for protections against unjustified housing and banking discrimination based solely on a prior incarceration. [Replace with your first project or report.]</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="band" id="approach">
+      <div class="band-head">
+        <p class="eyebrow">Approach</p>
+        <h2>Findings first, then the argument.</h2>
+      </div>
+      <div class="approach">
+        <div>
+          <h3>Research</h3>
+          <p>We collect and analyze information on charging, plea, detention, and reentry practices, and we publish what we find so others can use it, check it, and build on it.</p>
+        </div>
+        <div>
+          <h3>Public education</h3>
+          <p>We explain how prosecutorial authority works, what rights accused and formerly incarcerated people have, and where the process quietly turns on money rather than judgment.</p>
+        </div>
+        <div>
+          <h3>Policy advocacy</h3>
+          <p>We advocate for specific, workable reforms, within the limits that apply to organizations exempt under Section 501(c)(3). We do not support or oppose candidates for public office.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="involved">
+      <div class="band-head">
+        <p class="eyebrow">Get involved</p>
+        <h2>The work runs on people who decided not to look away.</h2>
+      </div>
+      <div class="involve">
+        <section>
+          <h3>Give</h3>
+          <p>Contributions fund research, public education materials, and the time it takes to do both carefully. We are a 501(c)(3); your gift is tax-deductible to the extent allowed by law.</p>
+          <a class="act" href="[DONATION LINK]">Make a donation</a>
+        </section>
+        <section>
+          <h3>Partner or volunteer</h3>
+          <p>We work with researchers, attorneys, reentry organizations, journalists, and students. If your work overlaps with ours, we would like to hear from you.</p>
+          <a class="act" href="mailto:[EMAIL]?subject=Partnership%20inquiry">Start a conversation</a>
+        </section>
+        <section>
+          <h3>Share your experience</h3>
+          <p>If you have been through the system &mdash; charged, detained, released, or turned away afterward &mdash; your account can inform our research and education work.</p>
+          <a class="act" href="mailto:[EMAIL]?subject=My%20experience">Tell us what happened</a>
+        </section>
+      </div>
+      <p class="notice"><b>We are not a law firm.</b> Hold Prosecutors Accountable, Inc. does not provide legal advice or representation and cannot take on individual cases. If you need help with a pending matter, please contact a licensed attorney or your local public defender's office. Nothing sent to us is protected by attorney&ndash;client privilege.</p>
+    </section>
+
+    <section class="band" id="contact">
+      <div class="band-head">
+        <p class="eyebrow">Contact</p>
+        <h2>Reach us.</h2>
+      </div>
+      <div class="contact">
+        <dl>
+          <div>
+            <dt>General inquiries</dt>
+            <dd><a href="mailto:[EMAIL]">[EMAIL]</a></dd>
+          </div>
+          <div>
+            <dt>Press</dt>
+            <dd><a href="mailto:[PRESS EMAIL]">[PRESS EMAIL]</a></dd>
+          </div>
+          <div>
+            <dt>Mailing address</dt>
+            <dd>[STREET]<br>[CITY, STATE ZIP]</dd>
+          </div>
+        </dl>
+        <div>
+          <p class="lede">We read everything that comes in. Response times depend on volume, and we cannot respond to requests for legal help.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <p>&copy; <span id="yr">2026</span> Hold Prosecutors Accountable, Inc. &mdash; a nonprofit corporation exempt under Section 501(c)(3) of the Internal Revenue Code. EIN [PENDING].</p>
+    <p>[CITY, STATE]<br><a href="mailto:[EMAIL]">[EMAIL]</a></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var rail = document.getElementById('rail');
+  var pitch = 30, lines = [], ticking = false, last = -1;
+
+  function build(){
+    if (window.innerWidth < 1000) { rail.innerHTML=''; lines=[]; return; }
+    var h = document.documentElement.scrollHeight;
+    var n = Math.ceil(h / pitch);
+    var frag = document.createDocumentFragment();
+    lines = [];
+    for (var i=0;i<n;i++){
+      var num = (i % 25) + 1;
+      var el = document.createElement('i');
+      el.textContent = num;
+      if (num === 1 && i > 0) el.className = 'brk';
+      frag.appendChild(el);
+      lines.push(el);
+    }
+    rail.innerHTML = '';
+    rail.appendChild(frag);
+  }
+
+  function mark(){
+    ticking = false;
+    if (!lines.length) return;
+    var i = Math.round((window.scrollY + window.innerHeight/2) / pitch);
+    if (i === last || i < 0 || i >= lines.length) return;
+    if (lines[last]) lines[last].classList.remove('live');
+    lines[i].classList.add('live');
+    last = i;
+  }
+
+  function onScroll(){
+    if (!ticking){ ticking = true; requestAnimationFrame(mark); }
+  }
+
+  var t;
+  function onResize(){ clearTimeout(t); t = setTimeout(function(){ last=-1; build(); mark(); }, 150); }
+
+  build();
+  mark();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onResize);
+  window.addEventListener('load', function(){ last=-1; build(); mark(); });
+})();
+</script>
+</body>
+</html>
