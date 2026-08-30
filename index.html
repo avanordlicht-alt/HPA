@@ -277,8 +277,20 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 }
 .amounts button:hover{border-color:var(--navy)}
 .amounts button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.custom{margin-bottom:16px}
+.custom label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;color:var(--gold-ink);margin-bottom:8px}
+.custom-in{display:flex;align-items:center;border:1px solid var(--rule);background:#fff}
+.custom-in span{padding:0 4px 0 14px;font-size:18px;color:var(--muted)}
+.custom-in input{
+  flex:1;border:0;padding:13px 14px 13px 4px;font-family:var(--body);font-size:18px;
+  color:var(--navy);background:transparent;width:100%;
+}
+.custom-in input:focus{outline:none}
+.custom-in:focus-within{border-color:var(--gold);outline:2px solid var(--gold);outline-offset:1px}
 .summary{background:var(--cream);padding:18px 20px;margin-bottom:24px;font-size:15px;line-height:1.6;color:var(--ink-2)}
 .give-box .btn{width:100%;text-align:center;font-size:17px;padding:17px 26px}
+.give-box .btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
 .fine{margin-top:18px;font-size:13.5px;line-height:1.6;color:var(--muted)}
 .where{display:flex;flex-direction:column;gap:16px}
 .where > div{border-left:3px solid var(--gold);padding-left:16px}
@@ -467,6 +479,11 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 }
 .hpa-bar button:hover{background:rgba(255,255,255,.1)}
 .hpa-bar button.on{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);font-weight:700}
+.hpa-bar button.save{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);font-weight:700}
+.hpa-bar button.save:hover{filter:brightness(1.06);background:var(--gold)}
+.hpa-bar button.save[disabled]{background:transparent;border-color:rgba(255,255,255,.2);
+  color:var(--on-navy);font-weight:400;cursor:default}
+.hpa-bar button.save.done{background:#2F6B3A;border-color:#2F6B3A;color:#fff}
 .hpa-bar .n{color:var(--gold);font-weight:700}
 @media (max-width:720px){
   .hpa-bar{gap:8px;padding:0 10px;font-size:13px;overflow-x:auto}
@@ -489,8 +506,8 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
   width:100%;font-family:var(--body);font-size:16px;line-height:1.6;color:var(--ink);
   border:1px solid var(--rule);border-radius:3px;padding:9px 11px;resize:vertical;min-height:80px;
 }
-.hpa-pop .foot{display:flex;gap:8px;align-items:center;margin-top:10px}
-.hpa-pop .foot .sp{flex:1}
+.hpa-pop .hpa-foot{display:flex;gap:8px;align-items:center;margin-top:10px}
+.hpa-pop .hpa-foot .sp{flex:1}
 .hpa-pop button{
   font-family:var(--body);font-size:14px;font-weight:700;cursor:pointer;border-radius:3px;
   border:1px solid var(--navy);background:var(--navy);color:#fff;padding:7px 14px;
@@ -968,6 +985,10 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
         </div>
         <p class="eyebrow" style="margin-bottom:14px">Choose an amount</p>
         <div class="amounts" id="amounts" role="group" aria-label="Donation amount" data-hpa-skip></div>
+        <div class="custom" id="customWrap" hidden>
+          <label for="customAmt">Enter an amount</label>
+          <div class="custom-in"><span>$</span><input type="number" id="customAmt" min="1" step="1" inputmode="numeric" aria-label="Other amount in dollars"></div>
+        </div>
         <p class="summary" id="summary" data-hpa-skip></p>
         <a class="btn btn-navy" id="giveBtn" href="[DONATION LINK]" data-hpa-skip>Give $50 monthly</a>
         <p class="fine">Giving is handled by our donation processor; you will be taken there to finish. Hold Prosecutors Accountable, Inc. is a 501(c)(3) organization; contributions are tax-deductible to the extent permitted by law. EIN [PENDING].</p>
@@ -1014,7 +1035,9 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
       <form class="adm-card" id="admLock" style="max-width:520px;margin:0 auto">
         <h2>Editor sign-in</h2>
-        <p class="hint">The password is shared by everyone who edits the site.</p>
+        <p class="hint">The password is shared by everyone who edits the site. Unlocking
+          takes you back to the site with editing switched on, so you change the words
+          where they sit and see exactly how they will look.</p>
         <label for="admPass">Editor password</label>
         <input type="password" id="admPass" autocomplete="current-password" spellcheck="false">
         <div class="adm-btns" style="margin-top:16px"><button class="adm-btn" type="submit">Unlock</button></div>
@@ -1026,7 +1049,9 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 
         <div class="adm-card">
           <h2>Page text</h2>
-          <p class="hint">Every line of text on the site is listed here. Type into a box and the site changes with it &mdash; nobody else sees the change until you publish.</p>
+          <p class="hint">Every line of text on the site is listed here, for when it is easier
+            than hunting for the words on the page. Type into a box and the site changes with it &mdash;
+            nobody else sees the change until you save.</p>
           <div class="adm-tools">
             <input type="search" id="admSearch" placeholder="Search the wording…" aria-label="Search the wording">
             <select id="admScope" aria-label="Show one page"></select>
@@ -1036,10 +1061,12 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
         </div>
 
         <div class="adm-card">
-          <h2>Publish</h2>
-          <p class="hint">Publishing writes <code>content.json</code> to the repository, which redeploys the site for everyone. Either let this page commit the file for you, or download it and upload it yourself.</p>
+          <h2>Saving to the live site</h2>
+          <p class="hint">Saving writes <code>content.json</code> to the repository, which redeploys the
+            site for everyone. Set the token up once here and the <b>Save</b> button in the bar works from
+            every page &mdash; or skip the token and commit the file yourself.</p>
 
-          <h3 style="margin-bottom:10px">Commit it from here</h3>
+          <h3 style="margin-bottom:10px">Set up saving once</h3>
           <div class="row">
             <div style="flex:3 1 320px">
               <label for="ghToken">GitHub token</label>
@@ -1057,7 +1084,7 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
             <div><label for="ghPath">File</label><input type="text" id="ghPath" spellcheck="false"></div>
           </div>
           <div class="adm-btns">
-            <button class="adm-btn gold" type="button" id="admPublish">Publish to the live site</button>
+            <button class="adm-btn gold" type="button" id="admPublish">Save to the live site now</button>
             <button class="adm-btn line" type="button" id="admForget">Forget token</button>
           </div>
           <p class="adm-note" id="admPublishMsg" hidden></p>
@@ -1200,7 +1227,29 @@ window.HPA = (function(){
   var published = {};    /* key -> text, from content.json */
   var pubMeta   = {};    /* version, updated, adminHash */
   var draft     = null;  /* {text:{}, adminHash?} — this browser only */
-  var settings  = {donateLink:"[DONATION LINK]"};
+  /* name, default, label, note — all editable from the editor */
+  var SETTINGS = [
+    ["donateLink", "[DONATION LINK]", "Donation link",
+     "Where the Donate buttons send people"],
+    ["monthlyAmounts", "10, 25, 50, 100, 250, 500", "Monthly amounts",
+     "The buttons on the monthly tab"],
+    ["onceAmounts", "25, 50, 100, 250, 500, 1000", "One-time amounts",
+     "The buttons on the one-time tab"],
+    ["amountParam", "amount", "Amount parameter",
+     "What your processor calls the amount in a link"],
+    ["frequencyParam", "frequency", "Frequency parameter",
+     "What your processor calls the frequency in a link"],
+    ["monthlyValue", "MONTHLY", "Monthly value",
+     "Every.org uses MONTHLY; others use monthly or recurring"],
+    ["onceValue", "ONCE", "One-time value",
+     "Every.org uses ONCE; others use once or one-time"],
+    ["directLinks", "", "A link for each amount",
+     "For Stripe Payment Links. One per line: monthly 25 https://buy.stripe.com/…"]
+  ];
+
+  var settings = {};
+  SETTINGS.forEach(function(s){ settings[s[0]] = s[1]; });
+
   var listeners = [];
   var current   = "home";
   var saveTimer = null;
@@ -1302,11 +1351,14 @@ window.HPA = (function(){
     var scope = SCOPES[SCOPES.length - 1];
     var meta = document.querySelector('meta[name="description"]');
 
-    add({
-      key:"setting.donateLink", kind:"setting", scope:scope,
-      orig:"[DONATION LINK]", label:"Donation link",
-      context:"Where the Donate buttons send people",
-      set:function(v){ settings.donateLink = v; }
+    SETTINGS.forEach(function(s){
+      add({
+        key:"setting." + s[0], kind:"setting", scope:scope,
+        orig:s[1], label:s[2], context:s[3],
+        set:(function(name){
+          return function(v){ settings[name] = v; };
+        })(s[0])
+      });
     });
 
     if (meta) add({
@@ -1659,49 +1711,119 @@ window.HPA = (function(){
 
   /* ---------- donate widget ---------- */
 
-  var MONTHLY = [10, 25, 50, 100, 250, 500];
-  var ONCE = [25, 50, 100, 250, 500, 1000];
+  /* The site never touches card details. Every path here hands the donor to a
+     hosted checkout: either a link per amount (Stripe Payment Links, which take
+     no amount parameter) or one link with the amount appended (Every.org,
+     Givebutter, Donorbox and most others). Both are set in the editor. */
+
   var monthly = true;
   var amount = 50;
+  var other = false;
 
   var wrap = document.getElementById("amounts");
   var summary = document.getElementById("summary");
   var giveBtn = document.getElementById("giveBtn");
   var tabMonthly = document.getElementById("tabMonthly");
   var tabOnce = document.getElementById("tabOnce");
+  var customWrap = document.getElementById("customWrap");
+  var customAmt = document.getElementById("customAmt");
 
-  function href(){
-    /* Placeholder links out as-is; a real processor URL gets the choice appended. */
-    var LINK = window.HPA.setting("donateLink");
-    if (!/^https?:/i.test(LINK)) return LINK;
-    return LINK + (LINK.indexOf("?") > -1 ? "&" : "?") +
-      "amount=" + amount + "&frequency=" + (monthly ? "monthly" : "once");
+  function set(name){ return String(window.HPA.setting(name) || "").trim(); }
+
+  function presets(){
+    var list = set(monthly ? "monthlyAmounts" : "onceAmounts")
+      .split(/[^0-9.]+/)
+      .map(Number)
+      .filter(function(n){ return n > 0; })
+      .slice(0, 8);
+    return list.length ? list : (monthly ? [10, 25, 50, 100, 250, 500] : [25, 50, 100, 250, 500, 1000]);
   }
 
+  /* "monthly 25 https://…", "once 100 https://…", "other https://…" */
+  function directLink(){
+    var found = null;
+    set("directLinks").split(/\n+/).forEach(function(line){
+      var parts = line.trim().split(/\s+/).filter(Boolean);
+      if (parts.length < 2) return;
+      var url = parts[parts.length - 1];
+      if (!/^https?:/i.test(url)) return;
+      var words = parts.slice(0, -1).join(" ").toLowerCase().replace(/[$,]/g, "");
+      var freq = /monthly|recurring/.test(words) ? "monthly" : /once|one.time|single/.test(words) ? "once" : null;
+      if (freq && freq !== (monthly ? "monthly" : "once")) return;
+      var value = (words.match(/\d+(\.\d+)?/) || [])[0];
+      if (/other|custom|any/.test(words) && !value){ if (other) found = url; return; }
+      if (!other && value && Number(value) === amount) found = url;
+    });
+    return found;
+  }
+
+  function href(){
+    var direct = directLink();
+    if (direct) return direct;
+
+    var link = set("donateLink");
+    if (!/^https?:/i.test(link)) return link;
+    if (!amount) return link;
+
+    return link + (link.indexOf("?") > -1 ? "&" : "?") +
+      encodeURIComponent(set("amountParam") || "amount") + "=" + amount + "&" +
+      encodeURIComponent(set("frequencyParam") || "frequency") + "=" +
+      encodeURIComponent(monthly ? (set("monthlyValue") || "MONTHLY") : (set("onceValue") || "ONCE"));
+  }
+
+  function money(n){ return "$" + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+
   function render(){
-    var values = monthly ? MONTHLY : ONCE;
-    if (values.indexOf(amount) < 0) amount = values[2];
+    var values = presets();
+    if (!other && values.indexOf(amount) < 0) amount = values[Math.min(2, values.length - 1)];
 
     wrap.innerHTML = "";
     values.forEach(function(v){
       var b = document.createElement("button");
       b.type = "button";
-      b.textContent = "$" + v;
-      b.setAttribute("aria-pressed", v === amount ? "true" : "false");
-      b.addEventListener("click", function(){ amount = v; render(); });
+      b.textContent = money(v);
+      b.setAttribute("aria-pressed", (!other && v === amount) ? "true" : "false");
+      b.addEventListener("click", function(){ other = false; amount = v; render(); });
       wrap.appendChild(b);
     });
+
+    var otherBtn = document.createElement("button");
+    otherBtn.type = "button";
+    otherBtn.textContent = "Other";
+    otherBtn.setAttribute("aria-pressed", other ? "true" : "false");
+    otherBtn.addEventListener("click", function(){
+      other = true;
+      amount = Number(customAmt.value) || 0;
+      render();
+      customAmt.focus();
+    });
+    wrap.appendChild(otherBtn);
+
+    customWrap.hidden = !other;
 
     tabMonthly.setAttribute("aria-pressed", monthly ? "true" : "false");
     tabOnce.setAttribute("aria-pressed", monthly ? "false" : "true");
 
-    summary.textContent = monthly
-      ? "You are giving $" + amount + " every month. You can change or cancel it at any time."
-      : "You are making a one-time gift of $" + amount + ".";
+    if (!amount){
+      summary.textContent = "Enter the amount you would like to give.";
+      giveBtn.textContent = "Continue";
+      giveBtn.removeAttribute("href");
+      giveBtn.setAttribute("aria-disabled", "true");
+      return;
+    }
 
-    giveBtn.textContent = monthly ? "Give $" + amount + " monthly" : "Give $" + amount;
+    giveBtn.removeAttribute("aria-disabled");
+    summary.textContent = monthly
+      ? "You are giving " + money(amount) + " every month. You can change or cancel it at any time."
+      : "You are making a one-time gift of " + money(amount) + ".";
+    giveBtn.textContent = monthly ? "Give " + money(amount) + " monthly" : "Give " + money(amount);
     giveBtn.setAttribute("href", href());
   }
+
+  customAmt.addEventListener("input", function(){
+    amount = Math.max(0, Math.floor(Number(customAmt.value) || 0));
+    render();
+  });
 
   tabMonthly.addEventListener("click", function(){ monthly = true; render(); });
   tabOnce.addEventListener("click", function(){ monthly = false; render(); });
@@ -1737,6 +1859,7 @@ window.HPA = (function(){
 
   var unlocked = false;
   var bar = null, flag = null, pop = null, live = false;
+  var saving = false, saved = false, savedTimer = null;
   var rows = {};        /* key -> {row, ta} for rendered fields */
   var openGroups = {};  /* scope id -> bool */
   var rendered = {};    /* scope id -> bool */
@@ -1760,6 +1883,8 @@ window.HPA = (function(){
     unlocked = true;
     try { sessionStorage.setItem(UNLOCK_KEY, "1"); } catch (e) {}
     syncLock();
+    setLive(true);
+    location.hash = "#/" + (lastPage === "admin" ? "" : lastPage);
   }
   function lock(){
     unlocked = false;
@@ -1830,17 +1955,17 @@ window.HPA = (function(){
     sp.className = "sp";
     bar.appendChild(sp);
 
-    var pubBtn = document.createElement("button");
-    pubBtn.type = "button";
-    pubBtn.textContent = "Publish…";
-    pubBtn.addEventListener("click", function(){
-      location.hash = "#/admin";
-      setTimeout(function(){
-        var card = document.getElementById("admPublish");
-        if (card) card.scrollIntoView({block:"center"});
-      }, 60);
-    });
-    bar.appendChild(pubBtn);
+    var saveBtn = document.createElement("button");
+    saveBtn.type = "button";
+    saveBtn.className = "save";
+    saveBtn.addEventListener("click", save);
+    bar.appendChild(saveBtn);
+
+    var panelBtn = document.createElement("button");
+    panelBtn.type = "button";
+    panelBtn.textContent = "All text…";
+    panelBtn.addEventListener("click", function(){ location.hash = "#/admin"; });
+    bar.appendChild(panelBtn);
 
     var outBtn = document.createElement("button");
     outBtn.type = "button";
@@ -1848,7 +1973,7 @@ window.HPA = (function(){
     outBtn.addEventListener("click", function(){ lock(); });
     bar.appendChild(outBtn);
 
-    bar.jump = jump; bar.liveBtn = liveBtn; bar.count = count;
+    bar.jump = jump; bar.liveBtn = liveBtn; bar.count = count; bar.saveBtn = saveBtn;
     document.body.appendChild(bar);
     document.documentElement.classList.add("hpa-on");
   }
@@ -1869,10 +1994,19 @@ window.HPA = (function(){
       b.className = "n";
       b.textContent = n;
       bar.count.appendChild(b);
-      bar.count.appendChild(document.createTextNode(n === 1 ? " unpublished change" : " unpublished changes"));
+      bar.count.appendChild(document.createTextNode(n === 1 ? " unsaved change" : " unsaved changes"));
     } else {
-      bar.count.textContent = "Everything is published";
+      bar.count.textContent = saved ? "" : "Everything is live";
     }
+
+    var btn = bar.saveBtn;
+    btn.className = "save" + (saved ? " done" : "");
+    btn.disabled = saving || (!n && !saved);
+    btn.textContent = saving ? "Saving…"
+      : saved ? "Saved — live in about a minute"
+      : n ? "Save " + n + (n === 1 ? " change" : " changes")
+      : "Nothing to save";
+
     bar.liveBtn.className = live ? "on" : "";
     if (bar.jump.value !== page()) bar.jump.value = page();
   }
@@ -1927,7 +2061,7 @@ window.HPA = (function(){
     pop.appendChild(ta);
 
     var foot = document.createElement("div");
-    foot.className = "foot";
+    foot.className = "hpa-foot";
 
     var revert = document.createElement("button");
     revert.type = "button";
@@ -2132,15 +2266,15 @@ window.HPA = (function(){
     var left = document.createElement("span");
     if (n){
       left.innerHTML = "<b>" + n + (n === 1 ? " change</b> is waiting" : " changes</b> are waiting") +
-        " on this device. Nobody else sees them until you publish.";
+        " on this device. Nobody else sees them until you save.";
     } else {
-      left.innerHTML = "<b>Everything is published.</b> The site reads the way it reads for visitors.";
+      left.innerHTML = "<b>Everything is saved.</b> The site reads the way it reads for visitors.";
     }
     statusEl.appendChild(left);
 
     var right = document.createElement("span");
     right.className = "hint";
-    right.textContent = at ? "Last published " + new Date(at).toLocaleString() : "Nothing published yet";
+    right.textContent = at ? "Last saved " + new Date(at).toLocaleString() : "Nothing saved yet";
     statusEl.appendChild(right);
   }
 
@@ -2212,24 +2346,56 @@ window.HPA = (function(){
     note(pubMsg, "The token is gone from this browser.", "ok");
   });
 
-  document.getElementById("admPublish").addEventListener("click", function(){
-    var btn = this;
+  function doPublish(){
     var cfg = saveGh();
     cfg.token = ghToken.value.trim();
-    if (!cfg.token){ note(pubMsg, "Paste a GitHub token with write access to the repository.", "bad"); return; }
-    if (!cfg.owner || !cfg.repo){ note(pubMsg, "The owner and repository are both needed.", "bad"); return; }
+    if (!cfg.token) return Promise.reject(new Error("no-token"));
+    if (!cfg.owner || !cfg.repo) return Promise.reject(new Error("no-repo"));
+    return HPA.publish(cfg);
+  }
 
-    btn.disabled = true;
-    note(pubMsg, "Publishing…", "");
-    HPA.publish(cfg).then(function(res){
+  /* Save from wherever you are: the bar, or ⌘S / Ctrl-S while editing. */
+  function save(){
+    if (saving || !HPA.changed()) return;
+    saving = true;
+    saved = false;
+    if (savedTimer) clearTimeout(savedTimer);
+    syncBar();
+    note(pubMsg, "Saving…", "");
+
+    doPublish().then(function(res){
       var url = res && res.commit && res.commit.html_url;
-      note(pubMsg, "Published. The site rebuilds in about a minute." + (url ? " Commit: " + url : ""), "ok");
+      saving = false;
+      saved = true;
+      savedTimer = setTimeout(function(){ saved = false; syncBar(); }, 6000);
+      note(pubMsg, "Saved. The site rebuilds in about a minute." + (url ? " Commit: " + url : ""), "ok");
       renderFields();
       syncAll();
     })["catch"](function(err){
-      note(pubMsg, "Not published — " + (err && err.message ? err.message : "the request failed") +
-        " You can still download the file and upload it yourself.", "bad");
-    })["finally"](function(){ btn.disabled = false; });
+      saving = false;
+      syncBar();
+      var why = err && err.message;
+      var text = why === "no-token"
+        ? "Paste a GitHub token here once and Save works from every page."
+        : why === "no-repo" ? "The owner and repository are both needed."
+        : "Not saved — " + (why || "the request failed") + " You can still download the file and commit it yourself.";
+      location.hash = "#/admin";
+      setTimeout(function(){
+        note(pubMsg, text, "bad");
+        document.getElementById("admPublish").scrollIntoView({block:"center"});
+        if (why === "no-token") ghToken.focus();
+      }, 80);
+    });
+  }
+
+  document.getElementById("admPublish").addEventListener("click", save);
+
+  document.addEventListener("keydown", function(ev){
+    if (!unlocked) return;
+    if ((ev.metaKey || ev.ctrlKey) && (ev.key === "s" || ev.key === "S")){
+      ev.preventDefault();
+      save();
+    }
   });
 
   document.getElementById("admDownload").addEventListener("click", function(){

@@ -41,30 +41,35 @@ There is a password-protected editor at **`/#/admin`**. It is not linked from
 anywhere on the site; you get there by typing the address. The default password
 is **`hpa-admin`** — change it before launch (see below).
 
-Once you are in, there are two ways to work:
+Signing in drops you back on the site with editing switched on and a bar across
+the top. From there:
 
-- **The editor panel.** Every line of text on the site, grouped by page, each in
-  its own box. Search it, or narrow it to one page. Typing in a box changes the
-  site immediately.
-- **Click text to edit.** Turn it on from the bar at the top and then click any
-  words anywhere on the site to rewrite them in place. Use the page menu in that
-  bar to move between pages while it is on — clicking a link edits the link's
-  wording instead of following it.
+- **Click any words to change them.** A small box opens where they sit; type,
+  and the page updates under you, in the real design, at the real size. Use the
+  page menu in the bar to move around while editing is on — clicking a link
+  edits the link's wording instead of following it.
+- **Save from any page.** The gold **Save** button in the bar publishes
+  everything you have changed, wherever you happen to be. `⌘S` / `Ctrl-S` does
+  the same. It needs the one-time token setup described below.
+- **All text…** opens the full panel: every line on the site in a list, grouped
+  by page, searchable, filterable down to just what you changed. Useful when
+  hunting for a phrase is easier than finding it on the page.
 
 Alongside the wording, the editor also holds the browser-tab title for each
 page, the sentence search engines show under the site name, and the donation
 link.
 
-### Nothing is live until you publish
+### Nothing is live until you save
 
-Edits are held in your own browser and are visible only to you. Publishing
-writes them to `content.json` in this repository, which redeploys the site.
-Two ways to do that, from the Publish card:
+Edits are held in your own browser and are visible only to you. Saving writes
+them to `content.json` in this repository, which redeploys the site. Two ways,
+both on the panel's Save card:
 
-1. **Commit from the page.** Paste a GitHub [fine-grained personal access
+1. **Let the page do it.** Paste a GitHub [fine-grained personal access
    token](https://github.com/settings/personal-access-tokens) scoped to this
-   repository with **Contents: read and write**. The button commits
-   `content.json` for you and Vercel redeploys.
+   repository with **Contents: read and write**, once. After that the **Save**
+   button in the bar commits `content.json` from any page and Vercel redeploys —
+   live in about a minute.
 2. **By hand.** Download `content.json` (or copy it) and commit the file to the
    repository root yourself. Nothing else is needed.
 
@@ -81,8 +86,8 @@ and the file wins — an edit in the code is never silently undone by an old
 override. Deleting `content.json` puts every word back to what the markup says.
 
 Text written by the script rather than the markup is not editable this way: the
-donation amount buttons, the sentence below them, the label on the Give button,
-and the copyright year.
+sentence under the donation amounts, the label on the Give button, and the
+copyright year. The donation amounts themselves are editable, as settings.
 
 ### About the password
 
@@ -150,22 +155,73 @@ better in social and email once one exists.
 
 ## Taking donations
 
-The donate page has a working amount picker (monthly/one-time, six presets), but
-the site does not process payments — the button links out. Options, roughly in
-order of least work:
+**Do not collect card numbers on this site.** Every option below hands the donor
+to a hosted checkout page run by the processor, so card data never touches this
+site and never passes through anything the organization has to secure. That is
+the right answer for a small nonprofit: it keeps PCI scope at effectively zero,
+and the processor issues the receipt.
 
-- **Every.org** — free for 501(c)(3)s, handles receipts, no monthly cost.
-- **Givebutter** — free platform, tips-optional model, good for campaigns.
-- **Stripe** — a Payment Link or Stripe Checkout gives full control; you handle
-  receipting and acknowledgment letters yourself.
+### What to use
 
-Whichever you pick, you get a URL that goes in `[DONATION LINK]` — set it in the
-editor ("Donation link", under Tab titles and settings), or replace the default
-in the script near the bottom of `index.html`. When that value is a real
-`https://` URL, the picker appends `?amount=50&frequency=monthly` so the chosen
-amount carries over — check the parameter names your processor expects and
-adjust the `href()` function if they differ. Don't build a custom checkout for
-this; the compliance surface isn't worth it.
+**Start with Stripe.** Create *Payment Links* in the Stripe dashboard — no code,
+no backend, and it works before the IRS determination letter arrives, which
+Every.org and Givebutter's nonprofit onboarding generally do not. Standard rate
+is 2.9% + 30¢; once the determination letter is in hand, email
+`nonprofit@stripe.com` with the EIN and letter to ask for the nonprofit rate of
+2.2% + 30¢ (it requires that at least 80% of volume be tax-deductible
+donations). Stripe pays out to the organization's bank account, handles Apple
+Pay and Google Pay automatically, and manages the recurring charges for monthly
+donors. What it does not do is write acknowledgment letters — that stays a
+back-office job.
+
+**Add Every.org once the 501(c)(3) is recognized**, if the receipting and the
+long tail of giving methods are worth more than the control. It is free to the
+nonprofit, issues tax receipts itself, and accepts donor-advised funds, stock,
+and crypto — three things that are real work to take otherwise. **Givebutter** is
+the comparable alternative, with better campaign pages and a tips-optional model.
+
+Whatever you pick, keep the button on this page pointing out to it. Do not build
+a custom checkout; the compliance surface is not worth it for donation volume
+this site will see.
+
+### Wiring it up
+
+Everything below is set in the editor, under *Tab titles and settings* — no code
+changes.
+
+**Stripe Payment Links** take no amount parameter in the URL, so each amount is
+its own link. Create one link per amount (monthly links use a recurring price,
+one-time links a one-off price), plus one "customers choose what to pay" link
+for the Other button, and paste them into **A link for each amount**, one per
+line:
+
+```
+monthly 10  https://buy.stripe.com/aaa
+monthly 25  https://buy.stripe.com/bbb
+monthly 50  https://buy.stripe.com/ccc
+once 25     https://buy.stripe.com/ddd
+once 50     https://buy.stripe.com/eee
+other       https://buy.stripe.com/fff
+```
+
+**Every.org, Givebutter, Donorbox** and most others take the amount in the URL,
+so one link is enough. Put it in **Donation link** — for Every.org that is
+`https://www.every.org/your-slug#donate` — and the page appends the chosen
+amount and frequency. The parameter names are settings too, because processors
+disagree about them; the defaults (`amount`, `frequency`, `MONTHLY`, `ONCE`)
+are Every.org's. Check your processor's documentation and adjust.
+
+Either way, **Monthly amounts** and **One-time amounts** set the buttons
+themselves — plain comma-separated numbers. Any amount with no matching direct
+link falls back to the Donation link, so the two styles can be mixed.
+
+### Before you take the first dollar
+
+- The EIN and the `[PENDING]` markers on the donate page and in the footer need
+  to be real before you solicit anything.
+- Most states require registration before soliciting charitable donations from
+  their residents, and a website that asks the whole country counts. Ask counsel
+  which registrations apply — this is the item most new organizations miss.
 
 ## Contact form
 
@@ -205,3 +261,6 @@ short privacy statement attached about what happens to what they send.
 3. **The Get Help content.** It is general procedural information, not advice,
    and it is written to stay on that side of the line. Worth a read by counsel
    anyway before launch, since it is the page most likely to be relied on.
+4. **Charitable solicitation registration.** Asking for donations on a public
+   website is soliciting in most states that require registration. Sort out
+   which ones apply before the donate page goes live.
