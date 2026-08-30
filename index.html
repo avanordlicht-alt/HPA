@@ -4,507 +4,1016 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hold Prosecutors Accountable, Inc.</title>
-<meta name="description" content="A 501(c)(3) nonprofit working on prosecutorial accountability, meaningful access to a defense, pretrial detention reform, and life after a sentence.">
+<meta name="description" content="A 501(c)(3) charitable and educational organization working for fairness, accountability, transparency, and equal treatment in the criminal justice system.">
+<meta name="theme-color" content="#16233F">
 <meta property="og:title" content="Hold Prosecutors Accountable, Inc.">
-<meta property="og:description" content="Research, public education, and policy advocacy on prosecutorial accountability and equal access to justice.">
+<meta property="og:description" content="Justice demands accountability. Research, public education, and policy advocacy on prosecutorial authority, a fair defense, pretrial detention, and life after release.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="/logo.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.className += " js";</script>
 <style>
 :root{
-  --paper:#EDEEEA;
-  --paper-2:#E4E6E0;
-  --ink:#16181A;
-  --ink-2:#4A4F52;
-  --rule:#C7CAC3;
-  --seal:#6B2226;
+  --navy:#16233F;
+  --navy-2:#1E2C4C;
+  --navy-deep:#0E1729;
+  --gold:#C9A24B;
+  --gold-ink:#8C7A4E;
+  --cream:#F6F3EC;
+  --cream-2:#FBF9F3;
+  --rule:#E4DFD4;
+  --ink:#3A404E;
+  --ink-2:#4A4F5C;
+  --muted:#6B7080;
+  --on-navy:#B7BFCF;
+  --on-navy-2:#A9B2C4;
 
-  --display:"Libre Caslon Display",Georgia,serif;
-  --body:"Public Sans","Helvetica Neue",Arial,sans-serif;
-  --util:"Courier Prime",ui-monospace,"Courier New",monospace;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
 
-  --rail-w:72px;
-  --pitch:30px;
-  --shell:1180px;
+  --shell:1240px;
+  --pad:56px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
 body{
-  background:var(--paper);
+  background:#fff;
   color:var(--ink);
   font-family:var(--body);
   font-size:17px;
-  line-height:1.6;
+  line-height:1.7;
   -webkit-font-smoothing:antialiased;
 }
 
-a{color:inherit}
-::selection{background:var(--seal);color:var(--paper)}
+a{color:var(--navy)}
+a:hover{color:var(--gold)}
+img{max-width:100%;display:block}
+::selection{background:var(--gold);color:var(--navy)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
-.skip{
-  position:absolute;left:-9999px;top:0;
-  background:var(--ink);color:var(--paper);
-  padding:12px 18px;z-index:99;font-family:var(--util);font-size:13px;
-}
+.skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--navy);color:#fff;padding:12px 18px;font-size:14px}
 .skip:focus{left:0}
 
-:focus-visible{outline:2px solid var(--seal);outline-offset:3px}
+.shell{max-width:var(--shell);margin:0 auto}
 
-/* ---------- shell + transcript rail ---------- */
+/* ---------- shared type ---------- */
 
-.page{
-  position:relative;
-  max-width:var(--shell);
-  margin:0 auto;
-  padding:0 28px;
+.eyebrow{
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-ink);font-weight:700;line-height:1.5;
 }
+.eyebrow.on-navy{color:var(--gold)}
 
-.rail{
-  display:none;
-  position:absolute;
-  top:0;left:28px;width:var(--rail-w);
-  pointer-events:none;
-  user-select:none;
-}
-.rail i{
-  display:block;
-  height:var(--pitch);
-  line-height:var(--pitch);
-  font-family:var(--util);
-  font-size:11px;
-  font-style:normal;
-  color:var(--rule);
-  text-align:right;
-  padding-right:22px;
-  border-right:1px solid var(--rule);
-}
-.rail i.brk{border-top:1px solid var(--rule)}
-.rail i.live{color:var(--seal);font-weight:700}
+h1,h2,h3,h4{font-family:var(--display);color:var(--navy);font-weight:600;line-height:1.2;text-wrap:pretty}
+h1{font-size:50px;line-height:1.14;letter-spacing:-.01em}
+h2{font-size:32px}
+h3{font-size:23px}
+p{text-wrap:pretty}
 
-@media (min-width:1000px){
-  .rail{display:block}
-  .page{padding-left:calc(var(--rail-w) + 56px)}
+.lede{font-size:19px;line-height:1.7;color:var(--ink-2)}
+
+.link{
+  display:inline-block;font-size:14px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--navy);text-decoration:none;
+  border-bottom:2px solid var(--gold);padding-bottom:3px;
 }
+.link:hover{color:var(--gold-ink)}
+
+.btn{
+  display:inline-block;font-size:16px;font-weight:700;text-decoration:none;
+  padding:16px 34px;border:1.5px solid transparent;cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s;font-family:inherit;
+}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy-deep);color:var(--gold)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#B8913F;color:var(--navy)}
+.btn-line{border-color:var(--navy);color:var(--navy);font-weight:600}
+.btn-line:hover{background:var(--navy);color:#fff}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn-row.center{justify-content:center}
+
+/* ---------- help banner ---------- */
+
+.alert{
+  background:var(--navy);color:#C9CFDC;font-size:13.5px;line-height:1.6;
+  padding:9px var(--pad);display:flex;justify-content:space-between;
+  align-items:center;gap:24px;flex-wrap:wrap;
+}
+.alert a{color:var(--gold);font-weight:600;border-bottom:1px solid var(--gold);text-decoration:none;white-space:nowrap}
+.alert a:hover{color:#fff;border-color:#fff}
+.alert .cred{white-space:nowrap}
 
 /* ---------- masthead ---------- */
 
-.masthead{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:24px;flex-wrap:wrap;
-  padding:34px 0 26px;
-  border-bottom:1px solid var(--rule);
+.masthead{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:20}
+.masthead .shell{
+  padding:14px var(--pad);display:flex;justify-content:space-between;
+  align-items:center;gap:28px;
 }
-.mark{text-decoration:none;display:block;max-width:270px}
-.mark b{
-  display:block;
-  font-family:var(--display);
-  font-weight:400;
-  font-size:23px;
-  line-height:1.12;
-  letter-spacing:.005em;
+.brand{display:flex;align-items:center;gap:13px;text-decoration:none;flex:0 0 auto}
+.brand img{height:46px;width:46px;object-fit:contain}
+.brand .brand-text{display:block}
+.brand b{
+  display:block;font-family:var(--display);font-size:19px;font-weight:600;
+  color:var(--navy);line-height:1.05;letter-spacing:-.005em;
 }
-.mark span{
-  display:block;margin-top:7px;
-  font-family:var(--util);font-size:10.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-2);
+.brand .sub{
+  display:block;margin-top:3px;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-ink);font-weight:700;
 }
-.nav{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.brand:hover b{color:var(--navy)}
+
+.nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .nav a{
-  font-family:var(--util);font-size:12px;letter-spacing:.1em;
-  text-transform:uppercase;text-decoration:none;color:var(--ink-2);
-  padding-bottom:2px;border-bottom:1px solid transparent;
+  font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--navy);font-weight:600;text-decoration:none;white-space:nowrap;
+  border-bottom:2px solid transparent;padding-bottom:2px;
 }
-.nav a:hover{color:var(--ink);border-bottom-color:var(--seal)}
-.nav a.give{color:var(--seal);border-bottom-color:var(--seal)}
+.nav a:hover{color:var(--gold-ink);border-bottom-color:var(--gold)}
+.nav a[aria-current="page"]{border-bottom-color:var(--gold)}
+.nav a.give{background:var(--navy);color:#fff;padding:11px 18px;border-bottom:0;margin-left:2px}
+.nav a.give:hover{background:var(--navy-deep);color:var(--gold)}
 
-/* ---------- hero ---------- */
-
-.hero{padding:88px 0 0}
-.eyebrow{
-  font-family:var(--util);font-size:11.5px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--ink-2);
-}
-.hero h1{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(2.5rem,6.2vw,5.1rem);
-  line-height:1.0;letter-spacing:-.012em;
-  margin:26px 0 0;max-width:15ch;
-}
-.hero h1 em{font-style:italic;color:var(--seal);display:block}
-.stand{
-  margin-top:30px;max-width:52ch;
-  font-size:20px;line-height:1.55;color:var(--ink-2);
-}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
-.btn{
-  display:inline-block;text-decoration:none;
-  font-family:var(--util);font-size:12.5px;letter-spacing:.11em;
-  text-transform:uppercase;padding:15px 26px;border:1px solid var(--ink);
-}
-.btn.fill{background:var(--seal);border-color:var(--seal);color:var(--paper)}
-.btn.fill:hover{background:var(--ink);border-color:var(--ink)}
-.btn.line:hover{background:var(--ink);color:var(--paper)}
-
-.filing{
-  margin-top:64px;padding:16px 0;
-  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  display:flex;flex-wrap:wrap;gap:10px 30px;
-  font-family:var(--util);font-size:11.5px;letter-spacing:.06em;
-  color:var(--ink-2);text-transform:uppercase;
+.menu-btn{
+  display:none;background:none;border:1.5px solid var(--navy);color:var(--navy);
+  font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.11em;
+  text-transform:uppercase;padding:9px 14px;cursor:pointer;
 }
 
-/* ---------- generic band ---------- */
+/* ---------- page views ---------- */
 
-.band{padding:96px 0 0}
-.band-head{
-  display:grid;grid-template-columns:200px 1fr;gap:34px;
-  align-items:baseline;margin-bottom:46px;
+.js .view{display:none}
+.js .view.is-on{display:block}
+.view + .view{border-top:1px solid var(--rule)}
+.js .view + .view{border-top:0}
+
+.hero{padding:70px var(--pad);text-align:center}
+.hero.cream{background:var(--cream);border-bottom:1px solid var(--rule)}
+.hero.navy{background:var(--navy)}
+.hero.navy h1{color:#fff}
+.hero.navy .lede{color:var(--on-navy)}
+.hero h1{margin:16px auto 20px;max-width:900px}
+.hero .lede{margin:0 auto;max-width:740px}
+
+.prose{padding:72px var(--pad);max-width:1032px;margin:0 auto}
+.prose p{font-size:18px;line-height:1.85;margin-bottom:20px}
+.prose h2{margin-bottom:20px}
+.prose h2 + p{margin-top:0}
+.prose .hr{height:1px;background:var(--rule);margin:44px 0}
+
+.band{padding:76px var(--pad)}
+.band.cream{background:var(--cream)}
+.band.rule-top{border-top:1px solid var(--rule)}
+
+.grid{display:grid;gap:28px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.note{background:var(--cream);border-left:3px solid var(--gold);padding:26px 30px;margin-top:44px}
+.note p{margin:0;font-size:16.5px;line-height:1.75;color:var(--ink-2)}
+.note h3{margin-bottom:8px;font-size:21px}
+.note .link{margin-top:14px}
+
+.card{background:#fff;border:1px solid var(--rule);border-top:4px solid var(--gold);padding:28px}
+.card h3{margin-bottom:10px}
+.card p{font-size:16.5px;line-height:1.75;color:var(--ink-2)}
+.card.plain{border:1px solid var(--rule);border-top:1px solid var(--rule)}
+.card.flat{background:var(--cream);border:0;padding:32px}
+
+/* ---------- home ---------- */
+
+.seal{padding:54px var(--pad) 66px;text-align:center;background:#fff}
+.seal img{height:230px;width:auto;margin:0 auto}
+.seal .flourish{width:78px;height:2px;background:var(--gold);margin:24px auto 30px}
+.seal h1{margin:0 auto 22px;font-size:56px;max-width:860px}
+.seal .lede{margin:0 auto 36px;font-size:19.5px;max-width:730px}
+
+.ticker{
+  background:var(--navy);padding:20px var(--pad);display:flex;justify-content:center;
+  gap:36px;flex-wrap:wrap;font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;text-align:center;
 }
-.band-head h2{
-  font-family:var(--display);font-weight:400;
-  font-size:clamp(1.85rem,3.4vw,2.9rem);
-  line-height:1.08;letter-spacing:-.008em;max-width:20ch;
+.ticker i{color:#4B5A7A;font-style:normal}
+
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.pillars > div{
+  padding:0 40px;text-align:center;display:flex;flex-direction:column;align-items:center;
+  border-right:1px solid #DDD8CC;
 }
-@media (max-width:820px){
-  .band-head{grid-template-columns:1fr;gap:14px}
+.pillars > div:last-child{border-right:0}
+.pillars h3{font-size:26px;line-height:1.25;margin-bottom:14px}
+.pillars p{font-size:16.5px;line-height:1.75;color:var(--ink-2);margin-bottom:20px}
+.pillars .link{margin-top:auto}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.split h2{font-size:38px;margin-bottom:22px}
+.split p{font-size:17.5px;line-height:1.8;color:var(--ink-2);margin-bottom:18px}
+
+.figure{
+  position:relative;min-height:420px;background:var(--cream);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;
+}
+.figure img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.figure figcaption{font-size:14px;line-height:1.6;color:var(--gold-ink);letter-spacing:.04em;max-width:280px}
+
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.tile{display:block;background:#fff;border-top:4px solid var(--gold);padding:32px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.tile:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(14,23,41,.10)}
+.tile h3{margin-bottom:10px}
+.tile p{font-size:16px;line-height:1.7;color:var(--ink-2)}
+
+/* ---------- lists ---------- */
+
+.numbered{display:flex;flex-direction:column;gap:26px}
+.numbered > div{display:grid;grid-template-columns:56px 1fr;gap:22px;align-items:start}
+.numbered .num{font-family:var(--display);font-size:34px;color:var(--gold);line-height:1}
+.numbered p{margin:0;font-size:18px;line-height:1.8}
+
+.rows{border-top:1px solid var(--rule)}
+.rows > div{padding:28px 0;border-bottom:1px solid var(--rule)}
+.rows h3{font-size:24px;margin-bottom:10px}
+.rows p{margin:0;font-size:17px;line-height:1.75;color:var(--ink-2)}
+
+details.row{border-bottom:1px solid var(--rule)}
+details.row > summary{
+  list-style:none;cursor:pointer;padding:22px 0;display:flex;
+  justify-content:space-between;align-items:center;gap:24px;
+}
+details.row > summary::-webkit-details-marker{display:none}
+details.row summary h3{font-size:22px;margin-bottom:4px}
+details.row summary p{margin:0;font-size:16px;line-height:1.65;color:var(--ink-2)}
+details.row .caret{color:var(--gold);font-size:22px;line-height:1;flex:0 0 auto;transition:transform .15s}
+details.row[open] .caret{transform:rotate(90deg)}
+details.row .answer{padding:0 0 24px}
+details.row .answer p{font-size:16.5px;line-height:1.8;color:var(--ink-2);margin-bottom:12px}
+details.row .answer p:last-child{margin-bottom:0}
+details.row .answer ul{margin:0 0 12px 20px}
+details.row .answer li{font-size:16.5px;line-height:1.75;color:var(--ink-2);margin-bottom:6px}
+details.row .answer .fine{font-size:14.5px;color:var(--muted)}
+
+/* ---------- donate ---------- */
+
+.two-col{padding:64px var(--pad);max-width:1192px;margin:0 auto;display:grid;grid-template-columns:1fr .85fr;gap:56px;align-items:start}
+.give-box{border:1px solid var(--rule);border-top:4px solid var(--gold);padding:36px}
+.tabs{display:flex;border:1px solid var(--rule);margin-bottom:28px}
+.tabs button{
+  flex:1;text-align:center;padding:13px 10px;font:inherit;font-size:15px;font-weight:700;
+  cursor:pointer;border:0;background:#fff;color:var(--navy);letter-spacing:.02em;
+}
+.tabs button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.amounts button{
+  padding:15px 8px;font:inherit;font-size:17px;font-weight:700;cursor:pointer;
+  border:1px solid var(--rule);background:#fff;color:var(--navy);
+}
+.amounts button:hover{border-color:var(--navy)}
+.amounts button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.summary{background:var(--cream);padding:18px 20px;margin-bottom:24px;font-size:15px;line-height:1.6;color:var(--ink-2)}
+.give-box .btn{width:100%;text-align:center;font-size:17px;padding:17px 26px}
+.fine{margin-top:18px;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.where{display:flex;flex-direction:column;gap:16px}
+.where > div{border-left:3px solid var(--gold);padding-left:16px}
+.where h3{font-size:16.5px;font-family:var(--body);font-weight:700;margin-bottom:4px}
+.where p{font-size:16px;line-height:1.7;color:var(--ink-2)}
+
+.disclaimer{border:2px solid var(--navy);padding:26px}
+.disclaimer p{font-size:16px;line-height:1.75;margin-bottom:14px}
+.disclaimer p:last-child{margin-bottom:0}
+.disclaimer strong{color:var(--navy)}
+
+.contact-card{background:var(--cream);padding:26px}
+.contact-card h3{font-size:20px;margin-bottom:12px}
+.contact-card p{font-size:16px;line-height:1.7;color:var(--ink-2);margin-bottom:6px}
+.contact-card strong{color:var(--navy)}
+
+/* ---------- closing + footer ---------- */
+
+.closing{background:var(--navy);padding:58px var(--pad);text-align:center}
+.closing h2{font-size:34px;color:#fff;margin-bottom:12px}
+.closing p{margin:0 auto 28px;font-size:16.5px;line-height:1.7;color:var(--on-navy-2);max-width:580px}
+
+.foot{background:var(--navy-deep);padding:52px var(--pad) 34px;color:var(--on-navy-2)}
+.foot .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:44px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot b.name{display:block;font-family:var(--display);font-size:20px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:8px}
+.foot .tag{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px}
+.foot p{font-size:14.5px;line-height:1.7;color:#7C8598}
+.foot h2{font-size:11px;font-family:var(--body);letter-spacing:.18em;text-transform:uppercase;color:#fff;font-weight:700;margin-bottom:14px}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot li,.foot a{font-size:14.5px;color:var(--on-navy-2);text-decoration:none}
+.foot a:hover{color:var(--gold)}
+.foot .base{padding-top:22px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:#6B7484}
+
+/* ---------- responsive ---------- */
+
+@media (max-width:1240px){
+  .nav{gap:14px}
+  .nav a{font-size:11.5px;letter-spacing:.09em}
+  .nav a.give{padding:10px 14px}
+  .brand b{font-size:17px}
 }
 
-.lede{max-width:62ch;font-size:19px;line-height:1.62}
-.lede + .lede{margin-top:20px}
-.lede b{font-weight:600}
-
-/* ---------- commitments ---------- */
-
-.commit{margin-top:46px;border-top:1px solid var(--rule)}
-.commit div{
-  display:grid;grid-template-columns:210px 1fr;gap:34px;
-  padding:22px 0;border-bottom:1px solid var(--rule);
-}
-.commit dt{
-  font-family:var(--util);font-size:11.5px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--seal);padding-top:4px;
-}
-.commit dd{max-width:60ch;color:var(--ink-2)}
-@media (max-width:820px){
-  .commit div{grid-template-columns:1fr;gap:8px}
+@media (max-width:1180px){
+  :root{--pad:36px}
+  .nav{gap:12px}
+  .nav a{font-size:11px;letter-spacing:.07em}
+  .split{gap:40px}
+  .pillars > div{padding:0 24px}
 }
 
-/* ---------- focus areas ---------- */
-
-.areas{display:grid;grid-template-columns:1fr 1fr;gap:0 60px}
-.area{padding:30px 0 34px;border-top:1px solid var(--ink)}
-.area .tag{
-  font-family:var(--util);font-size:11px;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--seal);
+@media (max-width:1080px){
+  :root{--pad:24px}
+  h1{font-size:36px}
+  h2{font-size:27px}
+  .seal h1{font-size:38px}
+  .seal img{height:170px}
+  .hero,.band,.seal{padding-left:var(--pad);padding-right:var(--pad)}
+  .prose,.two-col{padding:48px var(--pad)}
+  .menu-btn{display:block;flex:0 0 auto}
+  .masthead .shell{flex-wrap:wrap;gap:14px}
+  .brand{flex:1 1 auto;min-width:0}
+  .brand img{height:40px;width:40px}
+  .brand b{font-size:16px}
+  .brand .sub{font-size:9px;letter-spacing:.14em}
+  .nav{
+    display:none;width:100%;flex-direction:column;align-items:stretch;
+    justify-content:flex-start;gap:0;padding:8px 0 14px;
+  }
+  .nav.is-open{display:flex}
+  .nav a{padding:13px 0;border-bottom:1px solid var(--rule)}
+  .nav a.give{text-align:center;margin-top:12px;padding:14px 20px}
+  .masthead{position:static}
+  .split,.g2,.g3,.tiles,.two-col,.pillars,.foot .cols{grid-template-columns:minmax(0,1fr)}
+  .pillars{gap:40px}
+  .pillars > div{border-right:0;border-bottom:1px solid #DDD8CC;padding:0 0 32px}
+  .pillars > div:last-child{border-bottom:0;padding-bottom:0}
+  .split h2{font-size:30px}
+  .figure{min-height:260px}
+  .numbered > div{grid-template-columns:40px 1fr;gap:16px}
+  .amounts{grid-template-columns:repeat(2,1fr)}
+  .alert{justify-content:flex-start}
+  .alert .cred{display:none}
 }
-.area h3{
-  font-family:var(--display);font-weight:400;font-size:1.65rem;
-  line-height:1.14;margin:14px 0 12px;
-}
-.area p{color:var(--ink-2);max-width:44ch}
-@media (max-width:820px){
-  .areas{grid-template-columns:1fr;gap:0}
-}
-
-/* ---------- approach ---------- */
-
-.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
-.approach h3{
-  font-family:var(--body);font-weight:600;font-size:15px;
-  letter-spacing:.02em;margin-bottom:10px;
-  padding-top:16px;border-top:2px solid var(--seal);
-}
-.approach p{color:var(--ink-2);font-size:16px}
-@media (max-width:820px){.approach{grid-template-columns:1fr;gap:30px}}
-
-/* ---------- involve ---------- */
-
-.involve{
-  margin-top:52px;background:var(--paper-2);
-  border:1px solid var(--rule);
-  display:grid;grid-template-columns:repeat(3,1fr);
-}
-.involve section{padding:34px 30px;border-right:1px solid var(--rule)}
-.involve section:last-child{border-right:0}
-.involve h3{
-  font-family:var(--display);font-weight:400;font-size:1.4rem;margin-bottom:12px;
-}
-.involve p{font-size:16px;color:var(--ink-2);margin-bottom:18px}
-.involve a.act{
-  font-family:var(--util);font-size:11.5px;letter-spacing:.11em;
-  text-transform:uppercase;text-decoration:none;color:var(--seal);
-  border-bottom:1px solid var(--seal);padding-bottom:2px;
-}
-.involve a.act:hover{color:var(--ink);border-bottom-color:var(--ink)}
-@media (max-width:900px){
-  .involve{grid-template-columns:1fr}
-  .involve section{border-right:0;border-bottom:1px solid var(--rule)}
-  .involve section:last-child{border-bottom:0}
-}
-
-.notice{
-  margin-top:26px;padding:20px 22px;
-  border-left:3px solid var(--seal);background:var(--paper-2);
-  font-size:15.5px;color:var(--ink-2);max-width:66ch;
-}
-.notice b{color:var(--ink);font-weight:600}
-
-/* ---------- contact ---------- */
-
-.contact{
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;
-  margin-top:8px;
-}
-.contact dl div{padding:16px 0;border-bottom:1px solid var(--rule)}
-.contact dt{
-  font-family:var(--util);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;
-}
-.contact dd a{color:var(--seal)}
-@media (max-width:820px){.contact{grid-template-columns:1fr;gap:34px}}
-
-/* ---------- footer ---------- */
-
-.foot{
-  margin-top:110px;padding:34px 0 60px;
-  border-top:1px solid var(--ink);
-  display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;
-  font-family:var(--util);font-size:11.5px;line-height:1.9;
-  letter-spacing:.05em;color:var(--ink-2);text-transform:uppercase;
-}
-.foot p{max-width:46ch}
 </style>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="page">
-  <div class="rail" id="rail" aria-hidden="true"></div>
-
-  <header class="masthead">
-    <a class="mark" href="/">
-      <b>Hold Prosecutors<br>Accountable, Inc.</b>
-      <span>501(c)(3) nonprofit</span>
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#mission">Mission</a>
-      <a href="#work">Our work</a>
-      <a href="#approach">Approach</a>
-      <a href="#involved">Get involved</a>
-      <a href="#contact">Contact</a>
-      <a class="give" href="#involved">Donate</a>
-    </nav>
-  </header>
-
-  <main id="main">
-
-    <section class="hero">
-      <p class="eyebrow">Research &middot; Public education &middot; Policy advocacy</p>
-      <h1>The system keeps a record. <em>Someone has to read it.</em></h1>
-      <p class="stand">We study how prosecutorial power is actually used, explain it in plain language, and work toward a criminal justice system where fairness does not depend on what a person can afford.</p>
-      <div class="cta-row">
-        <a class="btn fill" href="#involved">Support the work</a>
-        <a class="btn line" href="#work">See what we work on</a>
-      </div>
-      <div class="filing">
-        <span>Founded [YEAR]</span>
-        <span>[CITY, STATE]</span>
-        <span>EIN [PENDING]</span>
-        <span>Donations are tax-deductible to the extent allowed by law</span>
-      </div>
-    </section>
-
-    <section class="band" id="mission">
-      <div class="band-head">
-        <p class="eyebrow">Mission</p>
-        <h2>Accountability should not be optional for the people with the most discretion.</h2>
-      </div>
-      <p class="lede">Hold Prosecutors Accountable, Inc. is organized and operated exclusively for charitable and educational purposes under Section 501(c)(3) of the Internal Revenue Code. We promote fairness, accountability, transparency, and equal treatment in the criminal justice system.</p>
-      <p class="lede">We do that in three ways: we conduct and publish research on how criminal justice practices work in practice, we educate the public about prosecutorial authority and the rights of accused and formerly incarcerated people, and we advocate &mdash; within the limits that apply to charitable organizations &mdash; for laws and policies that make access to justice something other than a function of wealth, status, or institutional power.</p>
-
-      <dl class="commit">
-        <div>
-          <dt>Officials answer for misconduct</dt>
-          <dd>Government officials are appropriately accountable when they abuse the authority the public gave them.</dd>
-        </div>
-        <div>
-          <dt>A defense that is real</dt>
-          <dd>Accused people have meaningful access to a fair defense regardless of their financial resources.</dd>
-        </div>
-        <div>
-          <dt>Detention by judgment, not price</dt>
-          <dd>Pretrial detention decisions rest on individualized judicial determinations rather than an individual's ability to pay.</dd>
-        </div>
-        <div>
-          <dt>A sentence that ends</dt>
-          <dd>People who have completed their sentences have a meaningful opportunity to reintegrate into society.</dd>
-        </div>
-      </dl>
-    </section>
-
-    <section class="band" id="work">
-      <div class="band-head">
-        <p class="eyebrow">Our work</p>
-        <h2>Four places where discretion decides the outcome.</h2>
-      </div>
-      <div class="areas">
-        <article class="area">
-          <p class="tag">Charging &amp; discretion</p>
-          <h3>Prosecutorial accountability</h3>
-          <p>Prosecutors decide who is charged, what they are charged with, and what a plea will cost. Those decisions carry enormous weight and leave very little public record. We document how that discretion is used and press for the disclosure, oversight, and consequences that other public offices already accept. [Replace with your first project or report.]</p>
-        </article>
-        <article class="area">
-          <p class="tag">Right to counsel</p>
-          <h3>Access to a fair defense</h3>
-          <p>The right to counsel is only as strong as the resources behind it. We examine how underfunded defense systems change outcomes, and we advocate for the staffing, investigation, and expert funding that make a defense meaningful for people who cannot pay privately. [Replace with your first project or report.]</p>
-        </article>
-        <article class="area">
-          <p class="tag">Pretrial</p>
-          <h3>Detention and ability to pay</h3>
-          <p>Whether a person waits for trial at home or in a cell should turn on an individualized judicial finding about risk, not on the size of a bond they cannot post. We support pretrial systems built on judicial determinations rather than on price. [Replace with your first project or report.]</p>
-        </article>
-        <article class="area">
-          <p class="tag">Reentry</p>
-          <h3>Housing, banking, and life after release</h3>
-          <p>A completed sentence should end. We educate the public about the barriers and discrimination formerly incarcerated people face, and we advocate for protections against unjustified housing and banking discrimination based solely on a prior incarceration. [Replace with your first project or report.]</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="band" id="approach">
-      <div class="band-head">
-        <p class="eyebrow">Approach</p>
-        <h2>Findings first, then the argument.</h2>
-      </div>
-      <div class="approach">
-        <div>
-          <h3>Research</h3>
-          <p>We collect and analyze information on charging, plea, detention, and reentry practices, and we publish what we find so others can use it, check it, and build on it.</p>
-        </div>
-        <div>
-          <h3>Public education</h3>
-          <p>We explain how prosecutorial authority works, what rights accused and formerly incarcerated people have, and where the process quietly turns on money rather than judgment.</p>
-        </div>
-        <div>
-          <h3>Policy advocacy</h3>
-          <p>We advocate for specific, workable reforms, within the limits that apply to organizations exempt under Section 501(c)(3). We do not support or oppose candidates for public office.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="band" id="involved">
-      <div class="band-head">
-        <p class="eyebrow">Get involved</p>
-        <h2>The work runs on people who decided not to look away.</h2>
-      </div>
-      <div class="involve">
-        <section>
-          <h3>Give</h3>
-          <p>Contributions fund research, public education materials, and the time it takes to do both carefully. We are a 501(c)(3); your gift is tax-deductible to the extent allowed by law.</p>
-          <a class="act" href="[DONATION LINK]">Make a donation</a>
-        </section>
-        <section>
-          <h3>Partner or volunteer</h3>
-          <p>We work with researchers, attorneys, reentry organizations, journalists, and students. If your work overlaps with ours, we would like to hear from you.</p>
-          <a class="act" href="mailto:[EMAIL]?subject=Partnership%20inquiry">Start a conversation</a>
-        </section>
-        <section>
-          <h3>Share your experience</h3>
-          <p>If you have been through the system &mdash; charged, detained, released, or turned away afterward &mdash; your account can inform our research and education work.</p>
-          <a class="act" href="mailto:[EMAIL]?subject=My%20experience">Tell us what happened</a>
-        </section>
-      </div>
-      <p class="notice"><b>We are not a law firm.</b> Hold Prosecutors Accountable, Inc. does not provide legal advice or representation and cannot take on individual cases. If you need help with a pending matter, please contact a licensed attorney or your local public defender's office. Nothing sent to us is protected by attorney&ndash;client privilege.</p>
-    </section>
-
-    <section class="band" id="contact">
-      <div class="band-head">
-        <p class="eyebrow">Contact</p>
-        <h2>Reach us.</h2>
-      </div>
-      <div class="contact">
-        <dl>
-          <div>
-            <dt>General inquiries</dt>
-            <dd><a href="mailto:[EMAIL]">[EMAIL]</a></dd>
-          </div>
-          <div>
-            <dt>Press</dt>
-            <dd><a href="mailto:[PRESS EMAIL]">[PRESS EMAIL]</a></dd>
-          </div>
-          <div>
-            <dt>Mailing address</dt>
-            <dd>[STREET]<br>[CITY, STATE ZIP]</dd>
-          </div>
-        </dl>
-        <div>
-          <p class="lede">We read everything that comes in. Response times depend on volume, and we cannot respond to requests for legal help.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="foot">
-    <p>&copy; <span id="yr">2026</span> Hold Prosecutors Accountable, Inc. &mdash; a nonprofit corporation exempt under Section 501(c)(3) of the Internal Revenue Code. EIN [PENDING].</p>
-    <p>[CITY, STATE]<br><a href="mailto:[EMAIL]">[EMAIL]</a></p>
-  </footer>
+<div class="alert">
+  <span>Facing charges, held before trial, or denied housing or a bank account because of a record? <a href="#/help">Start here</a></span>
+  <span class="cred">A 501(c)(3) charitable and educational organization</span>
 </div>
+
+<header class="masthead">
+  <div class="shell">
+    <a class="brand" href="#/">
+      <img src="/logo-mark.png" alt="" width="46" height="46" onerror="this.onerror=null;this.src='/favicon.svg'">
+      <span class="brand-text">
+        <b>Hold Prosecutors Accountable</b>
+        <span class="sub">Justice demands accountability</span>
+      </span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#/mission">Mission</a>
+      <a href="#/accountability">Accountability</a>
+      <a href="#/defense">Fair Defense</a>
+      <a href="#/reentry">Reentry</a>
+      <a href="#/research">Research</a>
+      <a href="#/help">Get Help</a>
+      <a class="give" href="#/donate">Donate</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ==================================================== HOME -->
+  <section class="view" id="view-home" aria-label="Home">
+    <div class="seal">
+      <img src="/logo.png" alt="Hold Prosecutors Accountable" width="533" height="500" style="height:230px;width:auto" onerror="this.onerror=null;this.src='/favicon.svg';this.style.width='200px';this.style.height='200px'">
+      <div class="flourish"></div>
+      <h1>Justice demands accountability</h1>
+      <p class="lede">A charitable and educational organization working toward a criminal justice system in which officials are accountable for misconduct, a fair defense does not depend on money, and people who have completed their sentences get a real opportunity to rebuild.</p>
+      <div class="btn-row center">
+        <a class="btn btn-navy" href="#/donate">Donate</a>
+        <a class="btn btn-line" href="#/mission">Our mission</a>
+      </div>
+    </div>
+
+    <div class="ticker">
+      <span>Accountability for misconduct</span><i>&middot;</i>
+      <span>A fair defense for everyone</span><i>&middot;</i>
+      <span>No detention by wealth</span><i>&middot;</i>
+      <span>A real second chance</span>
+    </div>
+
+    <div class="band cream">
+      <div class="shell">
+        <div style="text-align:center;margin-bottom:52px">
+          <p class="eyebrow" style="margin-bottom:14px">What we work on</p>
+          <h2 style="font-size:38px">Three fronts, one principle</h2>
+        </div>
+        <div class="pillars">
+          <div>
+            <h3>Prosecutorial accountability</h3>
+            <p>Prosecutors decide who is charged, what they are charged with, and what leverage ends the case. We educate the public about that authority and press for officials to be appropriately accountable for misconduct.</p>
+            <a class="link" href="#/accountability">Read more</a>
+          </div>
+          <div>
+            <h3>The right to a fair defense</h3>
+            <p>Accused individuals should have meaningful access to a fair defense regardless of financial resources, and pretrial detention should rest on individualized judicial determinations rather than an ability to pay.</p>
+            <a class="link" href="#/defense">Read more</a>
+          </div>
+          <div>
+            <h3>Housing and banking</h3>
+            <p>A completed sentence should not be a life sentence of closed doors. We advocate for formerly incarcerated individuals to be a legally protected class, free from discrimination based solely on prior incarceration.</p>
+            <a class="link" href="#/reentry">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="shell split">
+        <figure class="figure">
+          <!-- Replace the caption below with: <img src="/photo-home.jpg" alt="..."> -->
+          <figcaption>Photograph &mdash; a courthouse, a meeting, the people this work serves</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow" style="margin-bottom:16px">Why we exist</p>
+          <h2>Power that is never reviewed does not correct itself.</h2>
+          <p>Most criminal cases never reach a jury. They are resolved by charging decisions, plea leverage, and whether a person can afford to go home before trial. Those are the moments that determine outcomes, and they attract the least public scrutiny.</p>
+          <p style="margin-bottom:26px">We work in public: we explain how the system actually operates, publish what our research finds, and advocate for reforms that do not make justice a function of wealth, status, or institutional power.</p>
+          <a class="link" href="#/mission">Our full mission</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="band cream rule-top">
+      <div class="shell tiles">
+        <a class="tile" href="#/help">
+          <h3>I need help</h3>
+          <p>Free, plain-language information on charges, pretrial release, housing denials, and bank accounts.</p>
+        </a>
+        <a class="tile" href="#/research">
+          <h3>Read the research</h3>
+          <p>Our research on criminal justice practices and potential reforms, published free for anyone to use.</p>
+        </a>
+        <a class="tile" href="#/donate">
+          <h3>Fund the work</h3>
+          <p>We accept no money from the offices we examine. Individual donors make this possible.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== MISSION -->
+  <section class="view" id="view-mission" aria-label="Mission">
+    <div class="hero cream">
+      <p class="eyebrow">Our mission</p>
+      <h1>Fairness, accountability, transparency, and equal treatment</h1>
+      <p class="lede">Hold Prosecutors Accountable, Inc. is organized and operated exclusively for charitable and educational purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code.</p>
+    </div>
+
+    <div class="prose">
+      <h2>Purpose</h2>
+      <p>The organization's purpose is to promote fairness, accountability, transparency, and equal treatment within the criminal justice system; educate the public concerning prosecutorial authority and accountability, criminal justice policy, the rights of accused and formerly incarcerated individuals, and barriers to successful reentry; conduct and disseminate research concerning criminal justice practices and potential reforms; and promote policies and practices designed to ensure that access to justice and opportunities for successful reentry are not determined by wealth, status, or institutional power.</p>
+
+      <div class="hr"></div>
+
+      <h2 style="margin-bottom:24px">The system we are working toward</h2>
+      <div class="numbered">
+        <div><span class="num">I</span><p>Government officials are appropriately accountable for misconduct.</p></div>
+        <div><span class="num">II</span><p>Accused individuals have meaningful access to a fair defense regardless of financial resources.</p></div>
+        <div><span class="num">III</span><p>Pretrial detention decisions are based on individualized judicial determinations rather than an individual's ability to pay.</p></div>
+        <div><span class="num">IV</span><p>People who have completed criminal sentences have a meaningful opportunity to reintegrate into society.</p></div>
+      </div>
+
+      <div class="hr"></div>
+
+      <h2>How we work</h2>
+      <div class="grid g2" style="gap:36px">
+        <div>
+          <h3 style="font-family:var(--body);font-size:17px;font-weight:700;margin-bottom:10px">Public education</h3>
+          <p style="font-size:16.5px;line-height:1.75;color:var(--ink-2);margin:0">We explain prosecutorial authority, criminal justice policy, and the rights of accused and formerly incarcerated people in language anyone can read.</p>
+        </div>
+        <div>
+          <h3 style="font-family:var(--body);font-size:17px;font-weight:700;margin-bottom:10px">Research</h3>
+          <p style="font-size:16.5px;line-height:1.75;color:var(--ink-2);margin:0">We conduct and disseminate research on criminal justice practices and potential reforms, and publish it free of charge.</p>
+        </div>
+        <div>
+          <h3 style="font-family:var(--body);font-size:17px;font-weight:700;margin-bottom:10px">Advocacy</h3>
+          <p style="font-size:16.5px;line-height:1.75;color:var(--ink-2);margin:0">Within the limitations applicable to organizations exempt under Section 501(c)(3), we advocate for laws and policies that expand access to justice and to a fair reentry. We do not support or oppose candidates for public office.</p>
+        </div>
+        <div>
+          <h3 style="font-family:var(--body);font-size:17px;font-weight:700;margin-bottom:10px">Independence</h3>
+          <p style="font-size:16.5px;line-height:1.75;color:var(--ink-2);margin:0">We are funded by individual donors and accept no funding from the offices whose conduct we examine.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <p><strong style="color:var(--navy)">[FOUNDING STORY]</strong> &mdash; when and where the organization was founded, who founded it, and what led to it. Readers and funders look for this first, and it is the one thing no one else can write for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== ACCOUNTABILITY -->
+  <section class="view" id="view-accountability" aria-label="Prosecutorial accountability">
+    <div class="hero navy">
+      <p class="eyebrow on-navy">Pillar one</p>
+      <h1>Prosecutorial accountability</h1>
+      <p class="lede">The power to charge is the power to decide an outcome. It should be exercised in public view, and it should carry consequences when it is abused.</p>
+    </div>
+
+    <div class="prose">
+      <p style="font-size:19px">A prosecutor decides whether to bring a case, which charges to file, what to offer in a plea, and what to disclose to the defense. Each of those choices shapes a person's life more than a verdict does, and most of them are never reviewed by a court, a board, or a voter with the information needed to judge them.</p>
+      <p style="font-size:19px;margin-bottom:40px">We work to make that authority legible to the public, and to build the case for accountability when it is misused.</p>
+
+      <div class="rows">
+        <div>
+          <h3>Educate the public on how the authority works</h3>
+          <p>Charging discretion, plea leverage, disclosure obligations, and immunity doctrines, explained without jargon so that people can follow what happens in their own courthouse.</p>
+        </div>
+        <div>
+          <h3>Document patterns, not just incidents</h3>
+          <p>A single reversal is a story. A repeated practice is a policy. Our research looks for the practices that recur across cases and offices.</p>
+        </div>
+        <div>
+          <h3>Support meaningful review</h3>
+          <p>We promote policies and practices designed to ensure that misconduct is examined by someone with the authority to act on it.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <h3>Report misconduct</h3>
+        <p>If you experienced or witnessed prosecutorial misconduct, you can tell us about it. We are not a law firm and cannot represent you, but what you send informs our research and our public education work.</p>
+        <a class="link" href="#/help">How to reach us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== FAIR DEFENSE -->
+  <section class="view" id="view-defense" aria-label="The right to a fair defense">
+    <div class="hero navy">
+      <p class="eyebrow on-navy">Pillar two</p>
+      <h1>The right to a fair defense</h1>
+      <p class="lede">A defense that depends on a bank balance is not a right. Neither is freedom before trial that depends on a deposit.</p>
+    </div>
+
+    <div class="prose">
+      <h2>Defense regardless of financial resources</h2>
+      <p>The constitutional guarantee of counsel is only as real as the time, investigation, and expert help behind it. When a defense is under-resourced, the outcome is decided by capacity rather than by facts. We educate the public about what adequate defense requires and advocate for the conditions that make it possible.</p>
+
+      <h2 style="margin-top:44px">Pretrial detention decided by a judge, not a price</h2>
+      <p>Pretrial detention decisions should be based on individualized judicial determinations rather than an individual's ability to pay. Detention before trial costs people their jobs, their housing, and their custody arrangements, and it increases the pressure to plead guilty regardless of guilt.</p>
+
+      <div class="grid g2" style="gap:24px;margin-top:44px">
+        <div class="card">
+          <h3 style="font-size:22px">What we publish</h3>
+          <p>Plain-language explanations of arraignment, bail hearings, conditions of release, and what to ask your attorney at each stage.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:22px">What we advocate for</h3>
+          <p>Release decisions grounded in individualized findings, and defense systems resourced to do the work the Constitution assumes.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <p>If you or someone you love is being held before trial, our <a href="#/help" style="font-weight:700;border-bottom:2px solid var(--gold);text-decoration:none">Get Help</a> page lists the questions to ask and where to turn. It is free, and it is written for people in the middle of a case.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== REENTRY -->
+  <section class="view" id="view-reentry" aria-label="Housing, banking, and life after release">
+    <div class="hero navy">
+      <p class="eyebrow on-navy">Pillar three</p>
+      <h1>Housing, banking, and life after release</h1>
+      <p class="lede">A completed sentence should end the punishment. Too often it begins a second one, administered by landlords and banks.</p>
+    </div>
+
+    <div class="prose">
+      <p style="font-size:19px">A person leaves custody having served their sentence, and then encounters a background check on every apartment application and a closed door at the bank. Without a home and an account, work is harder to keep and stability is harder to build, which makes every other outcome worse.</p>
+      <p style="font-size:19px;margin-bottom:40px">We educate the public about the barriers and discrimination faced by formerly incarcerated individuals, and we advocate, within the limitations applicable to organizations exempt under Section 501(c)(3), for laws and policies that would establish formerly incarcerated individuals as a legally protected class with respect to housing and banking, and prohibit unjustified discrimination in those areas based solely on an individual's prior incarceration.</p>
+
+      <div class="grid g2">
+        <div class="card flat">
+          <p class="eyebrow" style="margin-bottom:12px">Housing</p>
+          <h3 style="font-size:24px;line-height:1.25;margin-bottom:12px">A record is not a reason on its own</h3>
+          <p style="font-size:16.5px;line-height:1.75;color:var(--ink-2)">Blanket exclusions based solely on prior incarceration deny housing to people who present no risk at all. We advocate for protected-class status and for individualized assessment in its place.</p>
+        </div>
+        <div class="card flat">
+          <p class="eyebrow" style="margin-bottom:12px">Banking</p>
+          <h3 style="font-size:24px;line-height:1.25;margin-bottom:12px">Access to an account is access to everything</h3>
+          <p style="font-size:16.5px;line-height:1.75;color:var(--ink-2)">Wages, rent, and benefits move through bank accounts. Refusing one based solely on prior incarceration pushes people out of the financial system entirely.</p>
+        </div>
+      </div>
+
+      <div class="card plain" style="margin-top:44px;padding:30px">
+        <h3 style="font-size:22px;margin-bottom:10px">Were you denied housing or a bank account because of a record?</h3>
+        <p style="margin-bottom:16px">Your experience is evidence. Telling us what happened helps us document the pattern and argue for the change, even when we cannot represent you.</p>
+        <a class="btn btn-navy" style="font-size:15px;padding:14px 28px" href="mailto:[EMAIL]?subject=Housing%20or%20banking%20denial">Tell us what happened</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== RESEARCH -->
+  <section class="view" id="view-research" aria-label="Research and publications">
+    <div class="hero cream">
+      <p class="eyebrow">Research and publications</p>
+      <h1>What we study, and what we publish</h1>
+      <p class="lede">We conduct and disseminate research concerning criminal justice practices and potential reforms. Everything we publish is free to read, quote, and reuse with attribution.</p>
+    </div>
+
+    <div class="prose" style="max-width:1192px">
+      <h2 style="margin-bottom:28px">Our research agenda</h2>
+      <div class="grid g3" style="margin-bottom:56px">
+        <div style="border-top:3px solid var(--navy);padding-top:20px">
+          <h3 style="font-size:21px;line-height:1.3;margin-bottom:10px">Prosecutorial practice</h3>
+          <p style="font-size:16px;line-height:1.7;color:var(--ink-2);margin:0">How charging, plea, and disclosure decisions are made, and what happens when they go wrong.</p>
+        </div>
+        <div style="border-top:3px solid var(--navy);padding-top:20px">
+          <h3 style="font-size:21px;line-height:1.3;margin-bottom:10px">Pretrial detention</h3>
+          <p style="font-size:16px;line-height:1.7;color:var(--ink-2);margin:0">Who is held before trial, on what basis, and what that detention costs the person and the public.</p>
+        </div>
+        <div style="border-top:3px solid var(--gold);padding-top:20px">
+          <h3 style="font-size:21px;line-height:1.3;margin-bottom:10px">Reentry barriers</h3>
+          <p style="font-size:16px;line-height:1.7;color:var(--ink-2);margin:0">Housing and banking denials based on prior incarceration, and the policies that would prohibit them.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-bottom:24px">Publications</h2>
+      <!-- When the first report ships, replace this block with the publication list. -->
+      <div style="border:1px dashed var(--gold);background:var(--cream-2);padding:44px;text-align:center">
+        <p style="font-family:var(--display);font-size:24px;font-weight:600;color:var(--navy);margin-bottom:8px">Our first publications are in preparation.</p>
+        <p style="margin:0 auto 26px;font-size:16.5px;line-height:1.75;color:var(--ink-2);max-width:560px">Write to us and we will send each report when it is released. This placeholder is replaced by the publication list as soon as there is one.</p>
+        <a class="btn btn-navy" style="font-size:15px;padding:14px 26px" href="mailto:[EMAIL]?subject=Mailing%20list">Send me new reports</a>
+      </div>
+
+      <div class="note">
+        <h3>For journalists and researchers</h3>
+        <p>We share underlying data and are available for background. Press contact: <a href="mailto:[PRESS EMAIL]" style="font-weight:700">[PRESS EMAIL]</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== GET HELP -->
+  <section class="view" id="view-help" aria-label="Get help">
+    <div class="hero cream">
+      <p class="eyebrow">Get help</p>
+      <h1>Start with your situation</h1>
+      <p class="lede">Free, plain-language information. No account, no fee, no form to fill out before you can read it.</p>
+    </div>
+
+    <div class="two-col" style="grid-template-columns:1.2fr .8fr">
+      <div>
+        <div style="border-top:1px solid var(--rule)">
+          <details class="row">
+            <summary>
+              <div>
+                <h3>I am facing charges</h3>
+                <p>What happens at each stage, and what to ask your attorney.</p>
+              </div>
+              <span class="caret" aria-hidden="true">&rarr;</span>
+            </summary>
+            <div class="answer">
+              <p>A criminal case moves through a set of predictable stages: arrest or summons, arraignment, discovery, pretrial motions, plea negotiation, and &mdash; rarely &mdash; trial. Most cases end in a plea, so the decisions made long before any trial date are the ones that matter most.</p>
+              <p>Questions worth asking your attorney, in writing if you can:</p>
+              <ul>
+                <li>What exactly am I charged with, and what is the sentencing exposure on each count?</li>
+                <li>What has the prosecution turned over in discovery, and what is still outstanding?</li>
+                <li>Are there motions to suppress evidence or to dismiss any count?</li>
+                <li>What plea has been offered, when does it expire, and what happens if I decline it?</li>
+                <li>What are the consequences beyond the sentence &mdash; immigration, housing, licensing, employment?</li>
+              </ul>
+              <p class="fine">General information only, not legal advice. If you do not have a lawyer, contact your local public defender's office immediately &mdash; deadlines in criminal cases are short.</p>
+            </div>
+          </details>
+
+          <details class="row">
+            <summary>
+              <div>
+                <h3>I am being held before trial</h3>
+                <p>Bail hearings, conditions of release, and how to seek review.</p>
+              </div>
+              <span class="caret" aria-hidden="true">&rarr;</span>
+            </summary>
+            <div class="answer">
+              <p>Detention before trial is supposed to rest on an individualized judicial finding about flight risk and safety &mdash; not on whether a person can post a bond. In practice, the amount set often decides the outcome.</p>
+              <ul>
+                <li>Ask your attorney what findings the judge made on the record, and whether they were individualized.</li>
+                <li>Ask whether non-financial conditions (supervision, check-ins, electronic monitoring) were considered and rejected, and why.</li>
+                <li>Ask whether a bail review, reconsideration motion, or appeal is available, and on what timeline.</li>
+                <li>Gather what supports release: employment, housing, caregiving responsibilities, treatment enrollment, community ties.</li>
+              </ul>
+              <p class="fine">General information only, not legal advice. Procedures and deadlines differ by state and by court.</p>
+            </div>
+          </details>
+
+          <details class="row">
+            <summary>
+              <div>
+                <h3>I was denied housing because of a record</h3>
+                <p>What the denial can and cannot be based on, and what to document.</p>
+              </div>
+              <span class="caret" aria-hidden="true">&rarr;</span>
+            </summary>
+            <div class="answer">
+              <p>Many denials rely on a background check run by a consumer reporting agency. When that is what happened, federal fair-credit rules generally entitle you to notice of the denial, the name of the agency that supplied the report, and a copy of the report so you can dispute what is wrong in it.</p>
+              <ul>
+                <li>Ask for the denial in writing, including the specific reason.</li>
+                <li>Request a copy of the background report and check it for errors: wrong person, dismissed charges, sealed or expunged records, duplicate entries.</li>
+                <li>Dispute inaccuracies with the reporting agency in writing and keep copies.</li>
+                <li>Save the listing, the application, the fee receipt, and every message with the landlord or management company.</li>
+                <li>Check whether your state or city limits how criminal history may be used in housing decisions &mdash; several do.</li>
+              </ul>
+              <p class="fine">General information only, not legal advice. A local legal aid office or fair-housing organization can tell you what applies where you live.</p>
+            </div>
+          </details>
+
+          <details class="row">
+            <summary>
+              <div>
+                <h3>A bank refused me an account</h3>
+                <p>Why it happens, what to ask for in writing, and where to complain.</p>
+              </div>
+              <span class="caret" aria-hidden="true">&rarr;</span>
+            </summary>
+            <div class="answer">
+              <p>Account denials are often driven by a banking-history database rather than by a criminal record itself &mdash; an old unpaid overdraft can follow someone for years. Either way, you are entitled to know which report was used.</p>
+              <ul>
+                <li>Ask the bank for the reason in writing and for the name of the reporting agency it used.</li>
+                <li>Request your file from that agency and dispute anything inaccurate.</li>
+                <li>Ask whether the bank offers a second-chance or basic checking account.</li>
+                <li>Credit unions and community development financial institutions often use different criteria than large banks.</li>
+                <li>Complaints about a bank's conduct can be filed with the Consumer Financial Protection Bureau and with your state banking regulator.</li>
+              </ul>
+              <p class="fine">General information only, not legal advice.</p>
+            </div>
+          </details>
+
+          <details class="row">
+            <summary>
+              <div>
+                <h3>I want to report prosecutorial misconduct</h3>
+                <p>What to send us, and what we can and cannot do with it.</p>
+              </div>
+              <span class="caret" aria-hidden="true">&rarr;</span>
+            </summary>
+            <div class="answer">
+              <p>We are a research and public education organization. We cannot represent you, file anything on your behalf, or intervene in a pending case. What you send helps us document patterns and informs what we publish and advocate for.</p>
+              <p>If you choose to write to us, the most useful account includes:</p>
+              <ul>
+                <li>The county and court, and the case number if you have it.</li>
+                <li>What happened, in your own words, and roughly when.</li>
+                <li>Whether the issue was raised in court, and what the court did.</li>
+                <li>Any documents you already have &mdash; transcripts, motions, orders, correspondence.</li>
+                <li>Whether you are represented, and whether you want us to keep your name out of anything we publish.</li>
+              </ul>
+              <p class="fine">Do not send originals, and do not send anything covered by attorney&ndash;client privilege without talking to your lawyer first. Contacting us does not create an attorney&ndash;client relationship, and nothing you send is privileged.</p>
+            </div>
+          </details>
+        </div>
+
+        <div style="margin-top:40px;background:var(--navy);padding:30px">
+          <h3 style="color:#fff;font-size:22px;margin-bottom:10px">Tell us your story</h3>
+          <p style="font-size:16px;line-height:1.7;color:var(--on-navy);margin-bottom:20px">What happened to you shapes what we research and what we argue for. Share it in your own words &mdash; write as much or as little as you want, and tell us whether we may use your name.</p>
+          <a class="btn btn-gold" href="mailto:[EMAIL]?subject=My%20experience">Write to us</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div class="disclaimer">
+          <p class="eyebrow" style="margin-bottom:12px">Please read</p>
+          <p>Hold Prosecutors Accountable, Inc. is a charitable and educational organization. <strong>We are not a law firm.</strong> We do not provide legal advice or legal representation, and contacting us does not create an attorney&ndash;client relationship.</p>
+          <p>If you are in a criminal case, speak with a licensed attorney or your public defender's office. Deadlines in criminal cases are short and cannot be extended by us.</p>
+        </div>
+        <div class="contact-card">
+          <h3>Contact</h3>
+          <p>Email: <strong><a href="mailto:[EMAIL]">[EMAIL]</a></strong></p>
+          <p>Phone: <strong>[PHONE]</strong></p>
+          <p style="margin-bottom:0">Mail: <strong>[STREET], [CITY, STATE ZIP]</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== DONATE -->
+  <section class="view" id="view-donate" aria-label="Donate">
+    <div class="hero navy">
+      <p class="eyebrow on-navy">Support the work</p>
+      <h1>Accountability has no budget of its own</h1>
+      <p class="lede">We take no funding from the offices whose conduct we examine. Individual donors pay for the research, the public education, and the advocacy.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="give-box">
+        <div class="tabs" role="group" aria-label="Giving frequency">
+          <button type="button" id="tabMonthly" aria-pressed="true">Monthly</button>
+          <button type="button" id="tabOnce" aria-pressed="false">One time</button>
+        </div>
+        <p class="eyebrow" style="margin-bottom:14px">Choose an amount</p>
+        <div class="amounts" id="amounts" role="group" aria-label="Donation amount"></div>
+        <p class="summary" id="summary"></p>
+        <a class="btn btn-navy" id="giveBtn" href="[DONATION LINK]">Give $50 monthly</a>
+        <p class="fine">Giving is handled by our donation processor; you will be taken there to finish. Hold Prosecutors Accountable, Inc. is a 501(c)(3) organization; contributions are tax-deductible to the extent permitted by law. EIN [PENDING].</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <div>
+          <h2 style="font-size:28px;margin-bottom:14px">Where it goes</h2>
+          <div class="where">
+            <div>
+              <h3>Research</h3>
+              <p>Records requests, data collection, and the analysis behind every report we publish.</p>
+            </div>
+            <div>
+              <h3>Public education</h3>
+              <p>Plain-language guides, kept free and available to anyone who needs them.</p>
+            </div>
+            <div>
+              <h3>Advocacy</h3>
+              <p>Making the case for protected-class status in housing and banking, and for pretrial decisions made by judges rather than prices.</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h3>Other ways to give</h3>
+          <p>By check, payable to Hold Prosecutors Accountable, Inc., mailed to <strong>[STREET], [CITY, STATE ZIP]</strong>.</p>
+          <p style="margin-bottom:0">Employer matching, donor-advised funds, and stock gifts: <strong><a href="mailto:[EMAIL]?subject=Other%20ways%20to%20give">[EMAIL]</a></strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== CLOSING CTA ===== -->
+<section class="closing" id="closing">
+  <h2>Stand with us</h2>
+  <p>Contributions to Hold Prosecutors Accountable, Inc. are tax-deductible to the extent permitted by law.</p>
+  <a class="btn btn-gold" href="#/donate">Make a donation</a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot">
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <b class="name">Hold Prosecutors Accountable</b>
+        <span class="tag">Justice demands accountability</span>
+        <p>A 501(c)(3) charitable and educational organization working for fairness, accountability, transparency, and equal treatment in the criminal justice system.</p>
+      </div>
+      <div>
+        <h2>Our work</h2>
+        <ul>
+          <li><a href="#/accountability">Prosecutorial accountability</a></li>
+          <li><a href="#/defense">The right to a fair defense</a></li>
+          <li><a href="#/reentry">Housing and banking</a></li>
+          <li><a href="#/research">Research</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Organization</h2>
+        <ul>
+          <li><a href="#/mission">Mission and purpose</a></li>
+          <li><a href="#/donate">Donate</a></li>
+          <li><a href="#/help">Contact</a></li>
+          <li>Financials and filings <span style="color:#6B7484">[PENDING]</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get in touch</h2>
+        <ul>
+          <li><a href="mailto:[EMAIL]">[EMAIL]</a></li>
+          <li>[PHONE]</li>
+          <li>[STREET]<br>[CITY, STATE ZIP]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>&copy; <span id="yr">2026</span> Hold Prosecutors Accountable, Inc. All rights reserved. EIN [PENDING].</span>
+      <span>Not a law firm. Nothing on this site is legal advice.</span>
+    </div>
+  </div>
+</footer>
 
 <script>
 (function(){
-  document.getElementById('yr').textContent = new Date().getFullYear();
+  "use strict";
 
-  var rail = document.getElementById('rail');
-  var pitch = 30, lines = [], ticking = false, last = -1;
+  document.getElementById("yr").textContent = new Date().getFullYear();
 
-  function build(){
-    if (window.innerWidth < 1000) { rail.innerHTML=''; lines=[]; return; }
-    var h = document.documentElement.scrollHeight;
-    var n = Math.ceil(h / pitch);
-    var frag = document.createDocumentFragment();
-    lines = [];
-    for (var i=0;i<n;i++){
-      var num = (i % 25) + 1;
-      var el = document.createElement('i');
-      el.textContent = num;
-      if (num === 1 && i > 0) el.className = 'brk';
-      frag.appendChild(el);
-      lines.push(el);
-    }
-    rail.innerHTML = '';
-    rail.appendChild(frag);
+  /* ---------- page routing ---------- */
+
+  var PAGES = ["home","mission","accountability","defense","reentry","research","help","donate"];
+  var TITLES = {
+    home:"Hold Prosecutors Accountable, Inc.",
+    mission:"Mission — Hold Prosecutors Accountable",
+    accountability:"Prosecutorial accountability — Hold Prosecutors Accountable",
+    defense:"The right to a fair defense — Hold Prosecutors Accountable",
+    reentry:"Housing, banking, and life after release — Hold Prosecutors Accountable",
+    research:"Research — Hold Prosecutors Accountable",
+    help:"Get help — Hold Prosecutors Accountable",
+    donate:"Donate — Hold Prosecutors Accountable"
+  };
+
+  var nav = document.getElementById("nav");
+  var menuBtn = document.getElementById("menuBtn");
+  var closing = document.getElementById("closing");
+
+  function pageFromHash(){
+    var h = (location.hash || "").replace(/^#\/?/, "").replace(/\/$/, "");
+    return PAGES.indexOf(h) > -1 ? h : "home";
   }
 
-  function mark(){
-    ticking = false;
-    if (!lines.length) return;
-    var i = Math.round((window.scrollY + window.innerHeight/2) / pitch);
-    if (i === last || i < 0 || i >= lines.length) return;
-    if (lines[last]) lines[last].classList.remove('live');
-    lines[i].classList.add('live');
-    last = i;
+  function show(page, scroll){
+    PAGES.forEach(function(p){
+      var el = document.getElementById("view-" + p);
+      if (el) el.classList.toggle("is-on", p === page);
+    });
+    Array.prototype.forEach.call(nav.querySelectorAll("a"), function(a){
+      var target = a.getAttribute("href").replace(/^#\/?/, "") || "home";
+      if (target === page) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    closing.hidden = (page === "donate" || page === "help");
+    document.title = TITLES[page] || TITLES.home;
+    nav.classList.remove("is-open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    if (scroll) window.scrollTo(0, 0);
   }
 
-  function onScroll(){
-    if (!ticking){ ticking = true; requestAnimationFrame(mark); }
+  window.addEventListener("hashchange", function(){ show(pageFromHash(), true); });
+  show(pageFromHash(), false);
+
+  menuBtn.addEventListener("click", function(){
+    var open = nav.classList.toggle("is-open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  /* ---------- donate widget ---------- */
+
+  var MONTHLY = [10, 25, 50, 100, 250, 500];
+  var ONCE = [25, 50, 100, 250, 500, 1000];
+  var LINK = "[DONATION LINK]";
+
+  var monthly = true;
+  var amount = 50;
+
+  var wrap = document.getElementById("amounts");
+  var summary = document.getElementById("summary");
+  var giveBtn = document.getElementById("giveBtn");
+  var tabMonthly = document.getElementById("tabMonthly");
+  var tabOnce = document.getElementById("tabOnce");
+
+  function href(){
+    /* Placeholder links out as-is; a real processor URL gets the choice appended. */
+    if (!/^https?:/i.test(LINK)) return LINK;
+    return LINK + (LINK.indexOf("?") > -1 ? "&" : "?") +
+      "amount=" + amount + "&frequency=" + (monthly ? "monthly" : "once");
   }
 
-  var t;
-  function onResize(){ clearTimeout(t); t = setTimeout(function(){ last=-1; build(); mark(); }, 150); }
+  function render(){
+    var values = monthly ? MONTHLY : ONCE;
+    if (values.indexOf(amount) < 0) amount = values[2];
 
-  build();
-  mark();
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onResize);
-  window.addEventListener('load', function(){ last=-1; build(); mark(); });
+    wrap.innerHTML = "";
+    values.forEach(function(v){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = "$" + v;
+      b.setAttribute("aria-pressed", v === amount ? "true" : "false");
+      b.addEventListener("click", function(){ amount = v; render(); });
+      wrap.appendChild(b);
+    });
+
+    tabMonthly.setAttribute("aria-pressed", monthly ? "true" : "false");
+    tabOnce.setAttribute("aria-pressed", monthly ? "false" : "true");
+
+    summary.textContent = monthly
+      ? "You are giving $" + amount + " every month. You can change or cancel it at any time."
+      : "You are making a one-time gift of $" + amount + ".";
+
+    giveBtn.textContent = monthly ? "Give $" + amount + " monthly" : "Give $" + amount;
+    giveBtn.setAttribute("href", href());
+  }
+
+  tabMonthly.addEventListener("click", function(){ monthly = true; render(); });
+  tabOnce.addEventListener("click", function(){ monthly = false; render(); });
+  render();
 })();
 </script>
+
 </body>
 </html>
