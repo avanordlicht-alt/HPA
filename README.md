@@ -44,10 +44,15 @@ is **`hpa-admin`** — change it before launch (see below).
 Signing in drops you back on the site with editing switched on and a bar across
 the top. From there:
 
+- **Browse the site as usual.** The navigation, the Get help expanders, the
+  menu button and the giving tabs all keep working while editing is on, so you
+  walk to a page and fix what you find there. Editing stays on as you move
+  around, and survives a page refresh. There is also a page menu in the bar.
 - **Click any words to change them.** A small box opens where they sit; type,
-  and the page updates under you, in the real design, at the real size. Use the
-  page menu in the bar to move around while editing is on — clicking a link
-  edits the link's wording instead of following it.
+  and the page updates under you, in the real design, at the real size.
+- **Alt-click a link, expander or button** to edit its own wording instead of
+  activating it — nav labels, "Read more", the Get help titles. They show a
+  dotted outline on hover as a reminder. (No Alt key? Use the panel below.)
 - **Save from any page.** The gold **Save** button in the bar publishes
   everything you have changed, wherever you happen to be. `⌘S` / `Ctrl-S` does
   the same. It needs the one-time token setup described below.

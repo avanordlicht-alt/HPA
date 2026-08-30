@@ -485,6 +485,9 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
   color:var(--on-navy);font-weight:400;cursor:default}
 .hpa-bar button.save.done{background:#2F6B3A;border-color:#2F6B3A;color:#fff}
 .hpa-bar .n{color:var(--gold);font-weight:700}
+.hpa-bar .tip{color:var(--on-navy);font-size:13px}
+.hpa-bar .tip b{color:#fff;font-weight:600}
+@media (max-width:1180px){.hpa-bar .tip{display:none}}
 @media (max-width:720px){
   .hpa-bar{gap:8px;padding:0 10px;font-size:13px;overflow-x:auto}
   .hpa-bar .mark{display:none}
@@ -494,6 +497,16 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
 .hpa-live [data-hpa-ed]{cursor:text}
 .hpa-live [data-hpa-ed]:hover{
   outline:2px dashed var(--gold);outline-offset:2px;background:rgba(201,162,75,.12);
+}
+/* links between pages, expanders and buttons still do their own job; the
+   dotted outline says their wording is editable with alt held down */
+.hpa-live a[href^="#"][data-hpa-ed]:hover,
+.hpa-live a[href^="#"]:hover [data-hpa-ed],
+.hpa-live summary[data-hpa-ed]:hover,
+.hpa-live summary:hover [data-hpa-ed],
+.hpa-live button[data-hpa-ed]:hover,
+.hpa-live button:hover [data-hpa-ed]{
+  outline:1px dotted rgba(201,162,75,.9);outline-offset:3px;background:none;cursor:pointer;
 }
 .hpa-pop{
   position:absolute;z-index:300;width:min(460px,calc(100vw - 24px));
@@ -1036,8 +1049,8 @@ details.row .answer .fine{font-size:14.5px;color:var(--muted)}
       <form class="adm-card" id="admLock" style="max-width:520px;margin:0 auto">
         <h2>Editor sign-in</h2>
         <p class="hint">The password is shared by everyone who edits the site. Unlocking
-          takes you back to the site with editing switched on, so you change the words
-          where they sit and see exactly how they will look.</p>
+          takes you back to the site with editing switched on: browse from page to page as
+          usual, click any words to change them, and see exactly how they will look.</p>
         <label for="admPass">Editor password</label>
         <input type="password" id="admPass" autocomplete="current-password" spellcheck="false">
         <div class="adm-btns" style="margin-top:16px"><button class="adm-btn" type="submit">Unlock</button></div>
@@ -1844,6 +1857,7 @@ window.HPA = (function(){
   if (!HPA) return;
 
   var UNLOCK_KEY = "hpa.unlocked.v1";
+  var LIVE_KEY   = "hpa.live.v1";
   var GH_KEY     = "hpa.github.v1";
   var GH_DEFAULT = {owner:"avanordlicht-alt", repo:"hpa", branch:"main", path:"content.json", token:""};
 
@@ -1864,7 +1878,10 @@ window.HPA = (function(){
   var openGroups = {};  /* scope id -> bool */
   var rendered = {};    /* scope id -> bool */
 
-  try { unlocked = sessionStorage.getItem(UNLOCK_KEY) === "1"; } catch (e) {}
+  try {
+    unlocked = sessionStorage.getItem(UNLOCK_KEY) === "1";
+    live = unlocked && sessionStorage.getItem(LIVE_KEY) === "1";
+  } catch (e) {}
 
   function page(){
     var h = (location.hash || "").replace(/^#\/?/, "").replace(/\/$/, "");
@@ -1884,7 +1901,7 @@ window.HPA = (function(){
     try { sessionStorage.setItem(UNLOCK_KEY, "1"); } catch (e) {}
     syncLock();
     setLive(true);
-    location.hash = "#/" + (lastPage === "admin" ? "" : lastPage);
+    location.hash = "#/" + (lastPage === "admin" || lastPage === "home" ? "" : lastPage);
   }
   function lock(){
     unlocked = false;
@@ -1951,6 +1968,12 @@ window.HPA = (function(){
     var count = document.createElement("span");
     bar.appendChild(count);
 
+    var tip = document.createElement("span");
+    tip.className = "tip";
+    tip.innerHTML = "Links and menus still work &mdash; browse to a page and edit it there. " +
+      "<b>Alt-click</b> a link to change its own wording.";
+    bar.appendChild(tip);
+
     var sp = document.createElement("span");
     sp.className = "sp";
     bar.appendChild(sp);
@@ -1973,7 +1996,7 @@ window.HPA = (function(){
     outBtn.addEventListener("click", function(){ lock(); });
     bar.appendChild(outBtn);
 
-    bar.jump = jump; bar.liveBtn = liveBtn; bar.count = count; bar.saveBtn = saveBtn;
+    bar.jump = jump; bar.liveBtn = liveBtn; bar.count = count; bar.saveBtn = saveBtn; bar.tip = tip;
     document.body.appendChild(bar);
     document.documentElement.classList.add("hpa-on");
   }
@@ -2008,6 +2031,7 @@ window.HPA = (function(){
       : "Nothing to save";
 
     bar.liveBtn.className = live ? "on" : "";
+    bar.tip.hidden = !live;
     if (bar.jump.value !== page()) bar.jump.value = page();
   }
 
@@ -2016,6 +2040,7 @@ window.HPA = (function(){
   function setLive(on){
     live = !!on && unlocked;
     document.body.classList.toggle("hpa-live", live);
+    try { sessionStorage.setItem(LIVE_KEY, live ? "1" : "0"); } catch (e) {}
     if (!live) closePop();
     syncBar();
   }
@@ -2103,13 +2128,27 @@ window.HPA = (function(){
     ta.setSelectionRange(ta.value.length, ta.value.length);
   }
 
+  /* Anything that moves you around the site keeps working while editing —
+     page links, the Get help expanders, the menu and the giving tabs — so you
+     can browse to a page and fix the words you find there. Alt-click one of
+     those to edit its own wording instead. Everything else edits on a click. */
+  function isControl(el){
+    var link = el.closest("a[href]");
+    if (link && /^#/.test(link.getAttribute("href"))) return true;
+    return !!el.closest("summary, button");
+  }
+
   document.addEventListener("click", function(ev){
     if (!live) return;
     var t = ev.target;
     if (!t || t.nodeType !== 1) return;
     if (t.closest(".hpa-bar, .hpa-pop, #view-admin")) return;
+    if (isControl(t) && !ev.altKey) return;
 
     var host = t.closest("[data-hpa-ed]");
+    /* an alt-click anywhere on a control takes the first words inside it, so
+       you need not land exactly on the text of an expander or a button */
+    if (!host && ev.altKey) host = t.closest("summary, button, a[href]");
     if (!host) return;
 
     var node = nodeAt(ev.clientX, ev.clientY);
@@ -2499,6 +2538,7 @@ window.HPA = (function(){
 
     if (unlocked){
       buildBar();
+      setLive(live);
       if (onAdmin && !fieldsEl.childNodes.length) renderFields();
     } else {
       dropBar();
